@@ -30,8 +30,20 @@ const buildPdf = async () => {
     console.log('******* ERROR WITH LOGIN *******')
     console.log(isLoginPage.length)
   }
-
   
+  console.log('SELECTING SPOT CHECK FORM...')
+  const spotLink = await page.$x('/html/body/app-root/app-layout/div/div/div/app-home/div[2]/mat-card/mat-card-header/div[2]/mat-card-title')
+  
+  await spotLink[0].click()
+  
+  await page.waitForNetworkIdle()
+
+  console.log('NEXT PAGE...')
+
+  const mstLink = await page.$x('/html/body/app-root/app-layout/div/div/div/app-home/div[1]/mat-card/mat-card-header/div[2]/mat-card-title')
+
+  console.log(typeof (await mstLink[0]?.getProperty('innerText'))?.jsonValue() === 'object')
+
 
   page.close()
 };
