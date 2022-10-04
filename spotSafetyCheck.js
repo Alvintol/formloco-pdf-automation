@@ -49,8 +49,26 @@ require('dotenv').config()
 
 
     await page.type('[formcontrolname=CompanyName]', '***COMPANY TEST NAME***')
+    await page.type('[formcontrolname=EmployeeName]', '***TEST EMPLOYEE NAME***')
+    await page.type('[formcontrolname=JobDescription]', '***TEST JOB DESCRIPTION***')
+    await page.type('[formcontrolname=Location]', '***LOCATION TEST***')
 
-    await page.type('[formfontrolname=]')
+    const evaluatorList = await page.$x('//*[@id="mat-input-6"]')
+    await evaluatorList[0].click()
 
-    page.close()
+    await page.waitForXPath('//*[@id="mat-option-87"]/span')
+    
+    const evaluator = await page.$x('//*[@id="mat-option-87"]/span')
+    await evaluator[0].click()
+    
+    
+    const supervisorList = await page.$x('//*[@id="mat-input-7"]')
+    await supervisorList[0].click()
+    
+    await page.waitForXPath('//*[@id="mat-option-137"]/span')
+
+    const supervisor = await page.$x('//*[@id="mat-option-137"]/span')
+    await supervisor[0].click()
+
+    // page.close()
   })()
