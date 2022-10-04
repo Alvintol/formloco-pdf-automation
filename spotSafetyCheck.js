@@ -38,12 +38,18 @@ const buildPdf = async () => {
   
   await page.waitForNetworkIdle()
 
-  console.log('NEXT PAGE...')
-
   const mstLink = await page.$x('/html/body/app-root/app-layout/div/div/div/app-home/div[1]/mat-card/mat-card-header/div[2]/mat-card-title')
 
-  console.log(typeof (await mstLink[0]?.getProperty('innerText'))?.jsonValue() === 'object')
+  // console.log(typeof (await mstLink[0]?.getProperty('innerText'))?.jsonValue() === 'object')
+  if (typeof (await mstLink[0]?.getProperty('innerText'))?.jsonValue() !== 'object') {
+    console.log('SUCESSFUL ACCESS TO SPOT CHECK INSPECTION FORM')
+  } else {
+    console.log('******* ERROR WITH ACCESSING SPOT CHECK INSPECTION FORM *******')
+  }
 
+  
+
+  // await page.type('[]')
 
   page.close()
 };
