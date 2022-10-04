@@ -10,18 +10,28 @@ const buildPdf = async () => {
 
   await page.waitForNetworkIdle()
 
-  const isLoginPage = () => page.evaluate(() => {
-    const html = document.querySelectorAll('.mat-form-field-infix .ng-tns-c91-1');
-    const htmlTags = Array.from(html).map(tag => tag.innerHTML)
-    return htmlTags
-  });
-
   console.log('LOGGING IN...');
   await page.type('[formcontrolname=email]', EMAIL)
   await page.type('[formcontrolname=password]', PASSWORD)
-  
-  await page.click('mat-icon .mat-icon .notranslate .icon-169px-action .material-icons .mat-icon-no-color .ng-star-inserted')
 
+  await page.click('[role=img]');
+
+  await page.waitForNetworkIdle()
+
+  const isLoginPage = await page.evaluate(() => {
+    const search = document.querySelectorAll('.mat-form-field-infix .ng-tns-c91-1');
+    const html = Array.from(search).map(tag => tag.innerHTML)
+    return html
+  })
+
+  if (isLoginPage.length === 0) {
+    console.log('LOGIN SUCCESSFUL')
+  } else {
+    console.log('******* ERROR WITH LOGIN *******')
+    console.log(isLoginPage.length)
+  }
+
+  
 
   page.close()
 };
