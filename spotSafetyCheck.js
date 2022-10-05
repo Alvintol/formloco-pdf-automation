@@ -31,14 +31,14 @@ require('dotenv').config()
       console.log(isLoginPage.length)
     }
 
-    console.log('SELECTING SPOT CHECK FORM...')
-    const spotLink = await page.$x('/html/body/app-root/app-layout/div/div/div/app-home/div[2]/mat-card/mat-card-header/div[2]/mat-card-title')
+    console.log('SELECTING SPOT CHECK FORM...');
+    const spotLink = await page.$x('/html/body/app-root/app-layout/div/div/div/app-home/div[2]/mat-card/mat-card-header/div[2]/mat-card-title');
 
-    await spotLink[0].click()
+    await spotLink[0].click();
 
-    await page.waitForNetworkIdle()
+    await page.waitForNetworkIdle();
 
-    const mstLink = await page.$x('/html/body/app-root/app-layout/div/div/div/app-home/div[1]/mat-card/mat-card-header/div[2]/mat-card-title')
+    const mstLink = await page.$x('/html/body/app-root/app-layout/div/div/div/app-home/div[1]/mat-card/mat-card-header/div[2]/mat-card-title');
 
     if (typeof (await mstLink[0]?.getProperty('innerText'))?.jsonValue() !== 'object') {
       console.log('SUCESSFUL ACCESS TO SPOT CHECK INSPECTION FORM')
@@ -48,27 +48,36 @@ require('dotenv').config()
 
 
 
-    await page.type('[formcontrolname=CompanyName]', '***COMPANY TEST NAME***')
-    await page.type('[formcontrolname=EmployeeName]', '***TEST EMPLOYEE NAME***')
-    await page.type('[formcontrolname=JobDescription]', '***TEST JOB DESCRIPTION***')
-    await page.type('[formcontrolname=Location]', '***LOCATION TEST***')
+    await page.type('[formcontrolname=CompanyName]', '***COMPANY TEST NAME***');
+    await page.type('[formcontrolname=EmployeeName]', '***TEST EMPLOYEE NAME***');
+    await page.type('[formcontrolname=JobDescription]', '***TEST JOB DESCRIPTION***');
+    await page.type('[formcontrolname=Location]', '***LOCATION TEST***');
 
-    const evaluatorList = await page.$x('//*[@id="mat-input-6"]')
-    await evaluatorList[0].click()
+    const evaluatorList = await page.$x('//*[@id="mat-input-6"]');
+    await evaluatorList[0].click();
 
-    await page.waitForXPath('//*[@id="mat-option-87"]/span')
-    
-    const evaluator = await page.$x('//*[@id="mat-option-87"]/span')
-    await evaluator[0].click()
-    
-    
-    const supervisorList = await page.$x('//*[@id="mat-input-7"]')
-    await supervisorList[0].click()
-    
-    await page.waitForXPath('//*[@id="mat-option-137"]/span')
+    await page.waitForXPath('//*[@id="mat-option-87"]/span');
 
-    const supervisor = await page.$x('//*[@id="mat-option-137"]/span')
-    await supervisor[0].click()
+    const evaluator = await page.$x('//*[@id="mat-option-87"]/span');
+    await evaluator[0].click();
+
+
+    const supervisorList = await page.$x('//*[@id="mat-input-7"]');
+    await supervisorList[0].click();
+
+    await page.waitForXPath('//*[@id="mat-option-137"]/span');
+
+    const supervisor = await page.$x('//*[@id="mat-option-137"]/span');
+    await supervisor[0].click();
+
+    const wsmrNextButton = await page.$x('//*[@id="cdk-accordion-child-0"]/div/div/button');
+    await wsmrNextButton[0].click();
+
+
+    // HAZARD IDENTIFICATION & CONTROL
+
+    const satHazard = await page.$x('//*[@id="mat-radio-2"]/label/span[1]/span[1]');
+    await satHazard[0].click();
 
     // page.close()
   })()
