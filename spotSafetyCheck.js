@@ -169,7 +169,16 @@ require('dotenv').config()
     // INCIDENT REPORTING
     console.log('ENTERING INCIDENT REPORT DATA...');
 
-    
+    const satIncidentButton1 = await page.$x('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[4]/div/div/app-incident-reporting/div/form/div[3]/mat-radio-group/mat-radio-button[1]'); 
+    const satIncidentButton2 = await page.$x('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[4]/div/div/app-incident-reporting/div/form/div[5]/mat-radio-group/mat-radio-button[1]'); 
+    const satIncidentButton3 = await page.$x('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[4]/div/div/app-incident-reporting/div/form/div[7]/mat-radio-group/mat-radio-button[1]'); 
+    const unsatIncidentButton = await page.$x('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[4]/div/div/app-incident-reporting/div/form/div[9]/mat-radio-group/mat-radio-button[2]'); 
+
+    await satIncidentButton1[0].click();
+    await satIncidentButton2[0].click();
+    await satIncidentButton3[0].click();
+    await unsatIncidentButton[0].click();
+    await page.waitForNetworkIdle();
 
 
 
