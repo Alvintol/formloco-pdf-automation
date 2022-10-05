@@ -30,18 +30,22 @@ require('dotenv').config()
       console.log('******* ERROR WITH LOGIN *******')
       console.log(isLoginPage.length)
     }
+    const clickHandler = async (path) => {
+      const target = await page.$x(path);
+      await page.waitForNetworkIdle();
+      await target[0].click();
+      await page.waitForNetworkIdle();
+    };
 
     console.log('SELECTING SPOT CHECK FORM...');
-    const spotLink = await page.$x('/html/body/app-root/app-layout/div/div/div/app-home/div[2]/mat-card/mat-card-header/div[2]/mat-card-title');
+    // Spot Check Inspection Button
+    await clickHandler('/html/body/app-root/app-layout/div/div/div/app-home/div[2]/mat-card/mat-card-header/div[2]/mat-card-title')
 
-    await spotLink[0].click();
-
-    await page.waitForNetworkIdle();
 
     const mstLink = await page.$x('/html/body/app-root/app-layout/div/div/div/app-home/div[1]/mat-card/mat-card-header/div[2]/mat-card-title');
 
     if (typeof (await mstLink[0]?.getProperty('innerText'))?.jsonValue() !== 'object') {
-      console.log('SUCESSFUL ACCESS TO SPOT CHECK INSPECTION FORM')
+      console.log('SUCCESSFUL ACCESS TO SPOT CHECK INSPECTION FORM')
     } else {
       console.log('******* ERROR WITH ACCESSING SPOT CHECK INSPECTION FORM *******')
     }
@@ -61,27 +65,20 @@ require('dotenv').config()
     await page.type('[formcontrolname=JobDescription]', '***TEST JOB DESCRIPTION***');
     await page.type('[formcontrolname=Location]', '***LOCATION TEST***');
 
-    const evaluatorList = await page.$x('//*[@id="mat-input-6"]');
-    await evaluatorList[0].click();
+    // Opening Evaluator List
+    await clickHandler('//*[@id="mat-input-6"]')
 
-    await page.waitForXPath('//*[@id="mat-option-87"]/span');
+    // Choosing Evaluator
+    await clickHandler('//*[@id="mat-option-87"]/span')
 
-    const evaluator = await page.$x('//*[@id="mat-option-87"]/span');
-    await evaluator[0].click();
+    // Opening Supervisor List
+    await clickHandler('//*[@id="mat-input-7"]')
 
+    // Choosing Supervisor
+    await clickHandler('//*[@id="mat-option-137"]/span')
 
-    const supervisorList = await page.$x('//*[@id="mat-input-7"]');
-    await supervisorList[0].click();
-
-    await page.waitForXPath('//*[@id="mat-option-137"]/span');
-
-    const supervisor = await page.$x('//*[@id="mat-option-137"]/span');
-    await supervisor[0].click();
-
-    const wsmrNextButton = await page.$x('//*[@id="cdk-accordion-child-0"]/div/div/button');
-    await wsmrNextButton[0].click();
-
-    await page.waitForNetworkIdle();
+    // Worksite Safety Management Review Button
+    await clickHandler('//*[@id="cdk-accordion-child-0"]/div/div/button');
 
     console.log('WORKSITE SAFETY MANAGEMENT REVIEW PAGE COMPLETE')
 
@@ -89,109 +86,111 @@ require('dotenv').config()
 
     console.log('ENTERING HAZARD IDENTIFICATION & CONTROL DATA...')
 
-    const satHazard = await page.$x('//*[@id="mat-radio-2"]/label/span[1]');
-    await satHazard[0].click();
-    await page.waitForNetworkIdle();
+    // Satisfactory Hazard Identification & Control radio
+    await clickHandler('//*[@id="mat-radio-2"]/label/span[1]')
+
     await page.type(formControlComment, "***SATISFACTORY COMMENT HAZARD***");
-    const commentSave1 = await page.$x('//*[@id="mat-dialog-0"]/app-comment/div[2]/div/button[3]');
-    await commentSave1[0].click();
-    await page.waitForNetworkIdle();
+
+    // Save Satisfactory Hazard Comment
+    await clickHandler('//*[@id="mat-dialog-0"]/app-comment/div[2]/div/button[3]');
     console.log('HAZARD COMMENT COMPLETE')
 
-    const unsatHazard = await page.$x('//*[@id="mat-radio-7"]/label/span[1]');
-    await unsatHazard[0].click();
-    await page.waitForNetworkIdle();
+    // Unsatisfactory Hazard Identification & Control radio
+    await clickHandler('//*[@id="mat-radio-7"]/label/span[1]');
     await page.type(formControlComment, "***UNSATISFACTORY DISCREPANCY HAZARD***");
 
-    const hazardCorActButton = await page.$x('//*[@id="mat-dialog-1"]/app-comment/div[2]/form/div[2]/div/button');
-    await hazardCorActButton[0].click();
-    await page.waitForXPath('//*[@id="mat-dialog-2"]/app-corrective-action/form/ion-datetime[1]');
-    await page.waitForNetworkIdle();
+    // Hazard Corrective Action Button
+    await clickHandler('//*[@id="mat-dialog-1"]/app-comment/div[2]/form/div[2]/div/button')
 
     const correctiveActionDate = async () => {
       await page.click(formControlDate);
-      await page.waitForNetworkIdle();
-
-      const corActDateDone = await page.$x(dateButtonPath);
-      await corActDateDone[0].click();
-      await page.waitForNetworkIdle();
+      await clickHandler(dateButtonPath)
     }
+
+    // Save Hazard Corrective Action Date
     await correctiveActionDate();
 
     await page.type(formControlCorAct, '***HAZARD CORRECTIVE ACTION TEST***')
 
-    const corActSave1 = await page.$x('//*[@id="mat-dialog-2"]/app-corrective-action/form/div[3]/mat-icon');
-    await corActSave1[0].click();
-    await page.waitForNetworkIdle();
+    // Save Hazard Corrective Action
+    await clickHandler('//*[@id="mat-dialog-2"]/app-corrective-action/form/div[3]/mat-icon');
 
-    const discrepancySave1 = await page.$x('//*[@id="mat-dialog-1"]/app-comment/div[2]/div/button[3]');
-    await discrepancySave1[0].click();
-    await page.waitForNetworkIdle();
+    // Save Hazard Discrepancy 
+    await clickHandler('//*[@id="mat-dialog-1"]/app-comment/div[2]/div/button[3]');
     console.log('HAZARD DISCREPANCY COMPLETE')
 
     await page.type('[formcontrolname=HazardComments]', '***HAZARD ADDITIONAL COMMENTS***');
-    const hazardNextButton = await page.$x('//*[@id="cdk-accordion-child-1"]/div/div/button[2]');
-    await hazardNextButton[0].click();
-    await page.waitForNetworkIdle();
+
+    // Hazard Identification & Control Next Button
+    await clickHandler('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[2]/div/div/div/button[2]');
+
     console.log('HAZARD IDENTIFICATION & CONTROL COMPLETE');
 
     // RULES & WORK PROCEDURES
 
     console.log('ENTERING RULES & WORK PROCEDURES DATA...');
 
-    const satRules = await page.$x('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[3]/div/div/app-rules-work-procedures/div/form/div[3]/mat-radio-group/mat-radio-button[1]');
-    await satRules[0].click();
+    // Satisfactory Rules & Work Procedures Radio
+    await clickHandler('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[3]/div/div/app-rules-work-procedures/div/form/div[3]/mat-radio-group/mat-radio-button[1]')
 
-    const unsatRules = await page.$x('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[3]/div/div/app-rules-work-procedures/div/form/div[5]/mat-radio-group/mat-radio-button[2]');
-    await unsatRules[0].click();
-    await page.waitForNetworkIdle();
+    // Unsatisfactory Rules & Work Procedures Radio
+    await clickHandler('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[3]/div/div/app-rules-work-procedures/div/form/div[5]/mat-radio-group/mat-radio-button[2]')
 
+    // await page.waitForSelector(formControlComment)
     await page.type(formControlComment, '****RULES DISCREPANCY****');
 
-    const rulesCorActButton = await page.$x('//*[@id="mat-dialog-3"]/app-comment/div[2]/form/div[2]/div/button');
-    await rulesCorActButton[0].click();
-    await page.waitForNetworkIdle();
-
+    // Rules Corrective Action Button
+    await clickHandler('//*[@id="mat-dialog-3"]/app-comment/div[2]/form/div[2]/div/button')
+    
+    // Save Rules Corrective Action Date
     await correctiveActionDate();
 
     await page.type(formControlCorAct, '***RULES CORRECTIVE ACTION TEST***')
-    const corActSave2 = await page.$x('//*[@id="mat-dialog-4"]/app-corrective-action/form/div[3]/mat-icon');
-    await corActSave2[0].click();
-    await page.waitForNetworkIdle();
 
-    const discrepancySave2 = await page.$x('//*[@id="mat-dialog-3"]/app-comment/div[2]/div/button[3]')
-    await discrepancySave2[0].click();
+    // Save Rules Corrective Action
+    await clickHandler('//*[@id="mat-dialog-4"]/app-corrective-action/form/div[3]/mat-icon');
+
+    // Save Rules Discrepancy 
+    await clickHandler('//*[@id="mat-dialog-3"]/app-comment/div[2]/div/button[3]');
+
     console.log('RULES DISCREPANCY COMPLETE');
 
     await page.type('[formcontrolname=RulesComments]', '***RULES ADDITIONAL COMMENTS***');
-    const rulesNextButton = await page.$x('//*[@id="cdk-accordion-child-2"]/div/div/button[2]');
-    await rulesNextButton[0].click();
-    await page.waitForNetworkIdle();
+    
+    // Rules & Work Procedures Next Button
+    await clickHandler('//*[@id="cdk-accordion-child-2"]/div/div/button[2]')
+
     console.log('RULES & WORK PROCEDURES COMPLETE');
 
     // INCIDENT REPORTING
     console.log('ENTERING INCIDENT REPORT DATA...');
 
-    const satIncidentButton1 = await page.$x('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[4]/div/div/app-incident-reporting/div/form/div[3]/mat-radio-group/mat-radio-button[1]');
-    const satIncidentButton2 = await page.$x('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[4]/div/div/app-incident-reporting/div/form/div[5]/mat-radio-group/mat-radio-button[1]');
-    const satIncidentButton3 = await page.$x('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[4]/div/div/app-incident-reporting/div/form/div[7]/mat-radio-group/mat-radio-button[1]');
-    const unsatIncidentButton = await page.$x('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[4]/div/div/app-incident-reporting/div/form/div[9]/mat-radio-group/mat-radio-button[2]');
+    // Satisfactory Incident Reporting Radio Button 1
+    await clickHandler('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[4]/div/div/app-incident-reporting/div/form/div[3]/mat-radio-group/mat-radio-button[1]');
 
-    await satIncidentButton1[0].click();
-    await satIncidentButton2[0].click();
-    await satIncidentButton3[0].click();
-    await unsatIncidentButton[0].click();
-    await page.waitForNetworkIdle();
+    // Satisfactory Incident Reporting Radio Button 2
+    await clickHandler('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[4]/div/div/app-incident-reporting/div/form/div[5]/mat-radio-group/mat-radio-button[1]');
 
+    // Satisfactory Incident Reporting Radio Button 3
+    await clickHandler('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[4]/div/div/app-incident-reporting/div/form/div[7]/mat-radio-group/mat-radio-button[1]');
+
+    // Unsatisfactory Incident Reporting Radio Button
+    await clickHandler('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[4]/div/div/app-incident-reporting/div/form/div[9]/mat-radio-group/mat-radio-button[2]');
+    
     await page.type(formControlComment, '***INCIDENT REPORTING DISCREPANCY***');
-    const incidentCorActButton = await page.$x('//*[@id="mat-dialog-5"]/app-comment/div[2]/form/div[2]/div/button');
-    await incidentCorActButton[0].click();
 
+    // Incident Reporting Correction Action Button
+    await clickHandler('//*[@id="mat-dialog-5"]/app-comment/div[2]/form/div[2]/div/button')
+
+    // Save Incident Reporting Date
     await correctiveActionDate();
 
-    page.type('[formcontrolname=CorrectiveActionRequired]', '***INCIDENT REPORTING CORRECTIVE ACTION***');
+    await page.type('[formcontrolname=CorrectiveActionRequired]', '***INCIDENT REPORTING CORRECTIVE ACTION***');
 
+    // Save Incident Corrective Action
+    await clickHandler('//*[@id="mat-dialog-6"]/app-corrective-action/form/div[3]/mat-icon')
 
+    console.log('INCIDENT REPORTING COMPLETE')
 
 
     // await page.waitForNetworkIdle();
