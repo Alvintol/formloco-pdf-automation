@@ -73,11 +73,30 @@ require('dotenv').config()
     const wsmrNextButton = await page.$x('//*[@id="cdk-accordion-child-0"]/div/div/button');
     await wsmrNextButton[0].click();
 
+    await page.waitForNetworkIdle();
+
+    console.log('WORKSITE SAFETY MANAGEMENT REVIEW PAGE COMPLETE')
 
     // HAZARD IDENTIFICATION & CONTROL
 
-    const satHazard = await page.$x('//*[@id="mat-radio-2"]/label/span[1]/span[1]');
+    const satHazard = await page.$x('//*[@id="mat-radio-2"]/label/span[1]');
     await satHazard[0].click();
+    await page.waitForNetworkIdle();
+    await page.type('[formcontrolname=comment]', "SATISFACTORY COMMENT HAZARD");
+    const commentSave1 = await page.$x('//*[@id="mat-dialog-0"]/app-comment/div[2]/div/button[3]');
+    await commentSave1[0].click();
+    await page.waitForNetworkIdle();
+    
+    const unsatHazard = await page.$x('//*[@id="mat-radio-7"]/label/span[1]');
+    await unsatHazard[0].click();
+    await page.waitForNetworkIdle();
+    await page.type('[formcontrolname=comment]', "UNSATISFACTORY DISCREPANCY HAZARD");
+    
+    const hazardCorActButton = await page.$x('//*[@id="mat-dialog-1"]/app-comment/div[2]/form/div[2]/div/button');
+    await hazardCorActButton[0].click();
+    await page.waitForNetworkIdle();
+    
+    
 
     // page.close()
   })()
