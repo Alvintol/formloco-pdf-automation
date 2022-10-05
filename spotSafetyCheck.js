@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 require('dotenv').config()
   ; (async () => {
 
-    const { URL, EMAIL, PASSWORD } = process.env
+    const { URL, EMAIL, PASSWORD } = process.env;
 
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
@@ -11,25 +11,26 @@ require('dotenv').config()
     await page.waitForNetworkIdle()
 
     console.log('LOGGING IN...');
-    await page.type('[formcontrolname=email]', EMAIL)
-    await page.type('[formcontrolname=password]', PASSWORD)
+    await page.type('[formcontrolname=email]', EMAIL);
+    await page.type('[formcontrolname=password]', PASSWORD);
 
     await page.click('[role=img]');
 
-    await page.waitForNetworkIdle()
+    await page.waitForNetworkIdle();
 
     const isLoginPage = await page.evaluate(() => {
       const search = document.querySelectorAll('.mat-form-field-infix .ng-tns-c91-1');
       const html = Array.from(search).map(tag => tag.innerHTML)
       return html
-    })
+    });
 
     if (isLoginPage.length === 0) {
       console.log('LOGIN SUCCESSFUL')
     } else {
       console.log('******* ERROR WITH LOGIN *******')
       console.log(isLoginPage.length)
-    }
+    };
+
     const clickHandler = async (path) => {
       const target = await page.$x(path);
       await page.waitForNetworkIdle();
@@ -38,6 +39,7 @@ require('dotenv').config()
     };
 
     console.log('SELECTING SPOT CHECK FORM...');
+
     // Spot Check Inspection Button
     await clickHandler('/html/body/app-root/app-layout/div/div/div/app-home/div[2]/mat-card/mat-card-header/div[2]/mat-card-title')
 
@@ -53,8 +55,9 @@ require('dotenv').config()
     const formControlComment = '[formcontrolname=comment]';
     const formControlDate = '[formcontrolname=DateCorrectiveActionToBeCompleted]';
     const formControlCorAct = '[formcontrolname=CorrectiveActionRequired]';
-
     const dateButtonPath = '/html/body/ion-picker/div[2]/div[1]/div[2]/button';
+
+
 
     // WORKSITE SAFETY MANAGEMENT REVIEW
 
@@ -82,6 +85,8 @@ require('dotenv').config()
 
     console.log('WORKSITE SAFETY MANAGEMENT REVIEW PAGE COMPLETE')
 
+
+
     // HAZARD IDENTIFICATION & CONTROL
 
     console.log('ENTERING HAZARD IDENTIFICATION & CONTROL DATA...')
@@ -105,7 +110,7 @@ require('dotenv').config()
     const correctiveActionDate = async () => {
       await page.click(formControlDate);
       await clickHandler(dateButtonPath)
-    }
+    };
 
     // Save Hazard Corrective Action Date
     await correctiveActionDate();
@@ -126,6 +131,8 @@ require('dotenv').config()
 
     console.log('HAZARD IDENTIFICATION & CONTROL COMPLETE');
 
+
+
     // RULES & WORK PROCEDURES
 
     console.log('ENTERING RULES & WORK PROCEDURES DATA...');
@@ -141,7 +148,7 @@ require('dotenv').config()
 
     // Rules Corrective Action Button
     await clickHandler('//*[@id="mat-dialog-3"]/app-comment/div[2]/form/div[2]/div/button')
-    
+
     // Save Rules Corrective Action Date
     await correctiveActionDate();
 
@@ -156,11 +163,13 @@ require('dotenv').config()
     console.log('RULES DISCREPANCY COMPLETE');
 
     await page.type('[formcontrolname=RulesComments]', '***RULES ADDITIONAL COMMENTS***');
-    
+
     // Rules & Work Procedures Next Button
     await clickHandler('//*[@id="cdk-accordion-child-2"]/div/div/button[2]')
 
     console.log('RULES & WORK PROCEDURES COMPLETE');
+
+
 
     // INCIDENT REPORTING
     console.log('ENTERING INCIDENT REPORT DATA...');
@@ -176,7 +185,7 @@ require('dotenv').config()
 
     // Unsatisfactory Incident Reporting Radio Button
     await clickHandler('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[4]/div/div/app-incident-reporting/div/form/div[9]/mat-radio-group/mat-radio-button[2]');
-    
+
     await page.type(formControlComment, '***INCIDENT REPORTING DISCREPANCY***');
 
     // Incident Reporting Correction Action Button
@@ -190,8 +199,44 @@ require('dotenv').config()
     // Save Incident Corrective Action
     await clickHandler('//*[@id="mat-dialog-6"]/app-corrective-action/form/div[3]/mat-icon')
 
-    
+    // Save Incident Discrepancy
+    await clickHandler('//*[@id="mat-dialog-5"]/app-comment/div[2]/div/button[3]');
+
+    await page.type('[formcontrolname=IncidentComments]', '***INCIDENT REPORTING ADDITIONAL COMMENTS***');
+
+    // Incident Reporting Next Button 
+    await clickHandler('//*[@id="cdk-accordion-child-3"]/div/div/button[2]');
     console.log('INCIDENT REPORTING COMPLETE')
+    
+    
+    // COMMUNICATION & TRAINING
+
+    console.log('ENTERING COMMUNICATION & TRAINING DATA...')
+
+    // Satisfactory Communication Radio Button 1 
+    await clickHandler('//*[@id="mat-radio-32"]/label/span[1]');
+
+    await page.type(formControlComment, '***SATISFACTORY COMMUNICATION COMMENT TEST***');
+
+    // Save Communication Comment
+    await clickHandler('//*[@id="mat-dialog-7"]/app-comment/div[2]/div/button[3]');
+
+    // Satisfactory Communication Radio Buttons 2-9
+    await clickHandler('//*[@id="mat-radio-36"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-39"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-104"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-107"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-110"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-113"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-116"]/label/span[1]');
+    
+    // Unsatisfactory Communication Radio Button 10
+    await clickHandler('//*[@id="mat-radio-121"]/label/span[1]');
+    await page.type(formControlComment, '***COMMUNICATION & TRAINING DISCREPANCY***');
+
+    
+    // Satisfactory Communication Radio Button 11
+    // await clickHandler('//*[@id="mat-radio-124"]/label/span[1]');
 
 
     // await page.waitForNetworkIdle();
