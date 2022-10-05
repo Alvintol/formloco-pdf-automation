@@ -82,7 +82,7 @@ require('dotenv').config()
     const satHazard = await page.$x('//*[@id="mat-radio-2"]/label/span[1]');
     await satHazard[0].click();
     await page.waitForNetworkIdle();
-    await page.type('[formcontrolname=comment]', "SATISFACTORY COMMENT HAZARD");
+    await page.type('[formcontrolname=comment]', "***SATISFACTORY COMMENT HAZARD***");
     const commentSave1 = await page.$x('//*[@id="mat-dialog-0"]/app-comment/div[2]/div/button[3]');
     await commentSave1[0].click();
     await page.waitForNetworkIdle();
@@ -90,13 +90,31 @@ require('dotenv').config()
     const unsatHazard = await page.$x('//*[@id="mat-radio-7"]/label/span[1]');
     await unsatHazard[0].click();
     await page.waitForNetworkIdle();
-    await page.type('[formcontrolname=comment]', "UNSATISFACTORY DISCREPANCY HAZARD");
+    await page.type('[formcontrolname=comment]', "***UNSATISFACTORY DISCREPANCY HAZARD***");
     
     const hazardCorActButton = await page.$x('//*[@id="mat-dialog-1"]/app-comment/div[2]/form/div[2]/div/button');
     await hazardCorActButton[0].click();
+    await page.waitForXPath('//*[@id="mat-dialog-2"]/app-corrective-action/form/ion-datetime[1]');
     await page.waitForNetworkIdle();
     
+    await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]');
+    await page.waitForNetworkIdle();
+
+    const corActDateDone1 = await page.$x('/html/body/ion-picker/div[2]/div[1]/div[2]/button');
+    await corActDateDone1[0].click();
+    await page.waitForNetworkIdle();
     
+    await page.type('[formcontrolname=CorrectiveActionRequired]', '***HAZARD CORRECTIVE ACTION TEST***')
+    
+    const corActSave1 = await page.$x('//*[@id="mat-dialog-2"]/app-corrective-action/form/div[3]/mat-icon');
+    await corActSave1[0].click();
+    await page.waitForNetworkIdle();
+    
+    const discrepancySave1 = await page.$x('//*[@id="mat-dialog-1"]/app-comment/div[2]/div/button[3]');
+    await discrepancySave1[0].click();
+    await page.waitForNetworkIdle();
+    
+    console.log('HAZARD COMMENT & DISCREPANCY COMPLETE')
 
     // page.close()
   })()
