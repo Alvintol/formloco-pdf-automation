@@ -86,6 +86,7 @@ require('dotenv').config()
     const commentSave1 = await page.$x('//*[@id="mat-dialog-0"]/app-comment/div[2]/div/button[3]');
     await commentSave1[0].click();
     await page.waitForNetworkIdle();
+    console.log('HAZARD COMMENT COMPLETE')
     
     const unsatHazard = await page.$x('//*[@id="mat-radio-7"]/label/span[1]');
     await unsatHazard[0].click();
@@ -113,8 +114,15 @@ require('dotenv').config()
     const discrepancySave1 = await page.$x('//*[@id="mat-dialog-1"]/app-comment/div[2]/div/button[3]');
     await discrepancySave1[0].click();
     await page.waitForNetworkIdle();
+    console.log('HAZARD DISCREPANCY COMPLETE')
     
-    console.log('HAZARD COMMENT & DISCREPANCY COMPLETE')
+    await page.type('[formcontrolname=HazardComments]', '***HAZARD ADDITIONAL COMMENTS***');
+    const hazardNextButton = await page.$x('//*[@id="cdk-accordion-child-1"]/div/div/button[2]');
+    await hazardNextButton[0].click();
+    await page.waitForNetworkIdle();
+    console.log('HAZARD IDENTIFICATION & CONTROL COMPLETE');
+
+
 
     // page.close()
   })()
