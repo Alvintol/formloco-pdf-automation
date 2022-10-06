@@ -332,7 +332,17 @@ require('dotenv').config()
     
     // Saves Safety Equipment Discrepancy
     await clickHandler('//*[@id="mat-dialog-12"]/app-comment/div[2]/div/button[3]');
+    console.log('SAFETY EQUIPMENT DISCREPANCY COMPLETE');
 
+    // N/A Safety Equipment Radio Button
+    await clickHandler('//*[@id="mat-radio-102"]/label/span[1]');
+
+    await page.type('[formcontrolname=SafetyEquipmentComments]', '***SAFETY EQUIPMENT ADDITIONAL COMMENTS TEST***');
+
+    console.log('SAFETY EQUIPMENT COMPLETE');
+    
+    
+    await clickHandler('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[10]');
 
     // page.close()
   })()
