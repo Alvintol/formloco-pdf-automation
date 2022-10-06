@@ -172,7 +172,7 @@ require('dotenv').config()
 
 
     // INCIDENT REPORTING
-    console.log('ENTERING INCIDENT REPORT DATA...');
+    console.log('ENTERING INCIDENT REPORTING DATA...');
 
     // Satisfactory Incident Reporting Radio Button 1
     await clickHandler('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[4]/div/div/app-incident-reporting/div/form/div[3]/mat-radio-group/mat-radio-button[1]');
@@ -207,6 +207,7 @@ require('dotenv').config()
     // Incident Reporting Next Button 
     await clickHandler('//*[@id="cdk-accordion-child-3"]/div/div/button[2]');
     console.log('INCIDENT REPORTING COMPLETE')
+
 
 
     // COMMUNICATION & TRAINING
@@ -244,7 +245,7 @@ require('dotenv').config()
 
     // Saves Communications Corrective Action
     await clickHandler('//*[@id="mat-dialog-9"]/app-corrective-action/form/div[3]/mat-icon');
-    
+
     // Saves Communication Discrepancy
     await clickHandler('//*[@id="mat-dialog-8"]/app-comment/div[2]/div/button[3]');
 
@@ -270,7 +271,7 @@ require('dotenv').config()
     await clickHandler('//*[@id="mat-radio-57"]/label/span[1]');
     await clickHandler('//*[@id="mat-radio-61"]/label/span[1]');
     await clickHandler('//*[@id="mat-radio-65"]/label/span[1]');
-    
+
     // Unsatisfactory PPE Radio Button
     await clickHandler('//*[@id="mat-radio-70"]/label/span[1]');
 
@@ -289,11 +290,22 @@ require('dotenv').config()
 
     // Saves PPE Discrepancy
     await clickHandler('//*[@id="mat-dialog-10"]/app-comment/div[2]/div/button[3]');
+    console.log('PERSONAL PROTECTIVE EQUIPMENT DISCREPANCY COMPLETED')
 
-    
-    
-    // // N/A PPE Radio BUtton
+    // N/A PPE Radio Button
     await clickHandler('//*[@id="mat-radio-75"]/label/span[1]');
+
+    await page.type('[formcontrolname=PersonalEquipmentComments]', '***PPE ADDITIONAL COMMENTS TEST***');
+
+    // PPE Next Button
+    await clickHandler('//*[@id="cdk-accordion-child-5"]/div/div/button[2]');
+    console.log('PERSONAL PROTECTIVE EQUIPMENT COMPLETE');
+
+
+
+    // SAFETY EQUIPMENT
+
+    console.log('ENTERING SAFETY EQUIPMENT DATA...');
 
     // await page.waitForNetworkIdle();
     // page.close()
