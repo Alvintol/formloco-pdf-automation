@@ -14,10 +14,10 @@ require('dotenv').config()
     await page.type('[formcontrolname=email]', EMAIL);
     await page.type('[formcontrolname=password]', PASSWORD);
 
+    // Signs in with provided credntials
     await page.click('[role=img]');
 
     await page.waitForNetworkIdle();
-
     const isLoginPage = await page.evaluate(() => {
       const search = document.querySelectorAll('.mat-form-field-infix .ng-tns-c91-1');
       const html = Array.from(search).map(tag => tag.innerHTML)
@@ -42,15 +42,6 @@ require('dotenv').config()
 
     // Spot Check Inspection Button
     await clickHandler('/html/body/app-root/app-layout/div/div/div/app-home/div[2]/mat-card/mat-card-header/div[2]/mat-card-title')
-
-
-    const mstLink = await page.$x('/html/body/app-root/app-layout/div/div/div/app-home/div[1]/mat-card/mat-card-header/div[2]/mat-card-title');
-
-    if (typeof (await mstLink[0]?.getProperty('innerText'))?.jsonValue() !== 'object') {
-      console.log('SUCCESSFUL ACCESS TO SPOT CHECK INSPECTION FORM')
-    } else {
-      console.log('******* ERROR WITH ACCESSING SPOT CHECK INSPECTION FORM *******')
-    }
 
     const formControlComment = '[formcontrolname=comment]';
     const formControlDate = '[formcontrolname=DateCorrectiveActionToBeCompleted]';
@@ -313,23 +304,23 @@ require('dotenv').config()
     await clickHandler('//*[@id="mat-radio-85"]/label/span[1]');
     await clickHandler('//*[@id="mat-radio-89"]/label/span[1]');
     await clickHandler('//*[@id="mat-radio-92"]/label/span[1]');
-    
+
     // Unsatisfactory Safety Equipment Radio Button
     await clickHandler('//*[@id="mat-radio-97"]/label/span[1]');
-    
+
     await page.type(formControlComment, '***SAFETY EQUIPMENT DISCREPANCY TEST***');
 
     // Safety Equipment Corrective Action Button
     await clickHandler('//*[@id="mat-dialog-12"]/app-comment/div[2]/form/div[2]/div');
-    
+
     // Saves Safety Equipment Corrective Action Date
     await correctiveActionDate();
 
     await page.type(formControlCorAct, '***SAFETY EQUIPMENT CORRECTIVE ACTION***');
-    
+
     // Saves Safety Equipment Corrective Action
     await clickHandler('//*[@id="mat-dialog-13"]/app-corrective-action/form/div[3]/mat-icon');
-    
+
     // Saves Safety Equipment Discrepancy
     await clickHandler('//*[@id="mat-dialog-12"]/app-comment/div[2]/div/button[3]');
     console.log('SAFETY EQUIPMENT DISCREPANCY COMPLETE');
@@ -340,10 +331,10 @@ require('dotenv').config()
     await page.type('[formcontrolname=SafetyEquipmentComments]', '***SAFETY EQUIPMENT ADDITIONAL COMMENTS TEST***');
 
     console.log('SAFETY EQUIPMENT COMPLETE');
-    
+
     // Clicks Signature Tab
     await clickHandler('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[10]');
-    
+
     // Completes forms and generates pdf
     // await clickHandler('//*[@id="cdk-accordion-child-9"]/div/div/mat-icon');
 
