@@ -317,9 +317,22 @@ require('dotenv').config()
     // Unsatisfactory Safety Equipment Radio Button
     await clickHandler('//*[@id="mat-radio-97"]/label/span[1]');
     
+    await page.type(formControlComment, '***SAFETY EQUIPMENT DISCREPANCY TEST***');
 
+    // Safety Equipment Corrective Action Button
+    await clickHandler('//*[@id="mat-dialog-12"]/app-comment/div[2]/form/div[2]/div');
+    
+    // Saves Safety Equipment Corrective Action Date
+    await correctiveActionDate();
 
-    await page.type('[formcontrolname=PersonalEquipmentComments]', '***PPE ADDITIONAL COMMENTS TEST***');
+    await page.type(formControlCorAct, '***SAFETY EQUIPMENT CORRECTIVE ACTION***');
+    
+    // Saves Safety Equipment Corrective Action
+    await clickHandler('//*[@id="mat-dialog-13"]/app-corrective-action/form/div[3]/mat-icon');
+    
+    // Saves Safety Equipment Discrepancy
+    await clickHandler('//*[@id="mat-dialog-12"]/app-comment/div[2]/div/button[3]');
+
 
     // page.close()
   })()
