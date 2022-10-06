@@ -271,7 +271,26 @@ require('dotenv').config()
     await clickHandler('//*[@id="mat-radio-61"]/label/span[1]');
     await clickHandler('//*[@id="mat-radio-65"]/label/span[1]');
     
+    // Unsatisfactory PPE Radio Button
+    await clickHandler('//*[@id="mat-radio-70"]/label/span[1]');
 
+    await page.type(formControlComment, '***PPE DISCREPANCY TEST***');
+
+    // PPE CORRECTIVE ACTION BUTTON
+    await clickHandler('//*[@id="mat-dialog-10"]/app-comment/div[2]/form/div[2]/div');
+
+    // Saves PPE Corrective ACtion Date
+    await correctiveActionDate();
+
+    await page.type(formControlCorAct, '***PPE CORRECTIVE ACTION***');
+
+    // Saves PPE Corrective ACtion
+    await clickHandler('//*[@id="mat-dialog-11"]/app-corrective-action/form/div[3]/mat-icon');
+
+    // Saves PPE Discrepancy
+    await clickHandler('//*[@id="mat-dialog-10"]/app-comment/div[2]/div/button[3]');
+
+    
     
     // // N/A PPE Radio BUtton
     await clickHandler('//*[@id="mat-radio-75"]/label/span[1]');
