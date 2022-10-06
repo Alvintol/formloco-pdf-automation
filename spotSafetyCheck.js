@@ -341,8 +341,11 @@ require('dotenv').config()
 
     console.log('SAFETY EQUIPMENT COMPLETE');
     
-    
+    // Clicks Signature Tab
     await clickHandler('/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[10]');
+    
+    // Completes forms and generates pdf
+    // await clickHandler('//*[@id="cdk-accordion-child-9"]/div/div/mat-icon');
 
     // page.close()
   })()
