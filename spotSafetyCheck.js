@@ -307,6 +307,19 @@ require('dotenv').config()
 
     console.log('ENTERING SAFETY EQUIPMENT DATA...');
 
-    // await page.waitForNetworkIdle();
+    // Satisfactory Safety Equipment Radio Buttons 1-5
+    await clickHandler('//*[@id="mat-radio-77"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-81"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-85"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-89"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-92"]/label/span[1]');
+    
+    // Unsatisfactory Safety Equipment Radio Button
+    await clickHandler('//*[@id="mat-radio-97"]/label/span[1]');
+    
+
+
+    await page.type('[formcontrolname=PersonalEquipmentComments]', '***PPE ADDITIONAL COMMENTS TEST***');
+
     // page.close()
   })()
