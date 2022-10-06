@@ -207,8 +207,8 @@ require('dotenv').config()
     // Incident Reporting Next Button 
     await clickHandler('//*[@id="cdk-accordion-child-3"]/div/div/button[2]');
     console.log('INCIDENT REPORTING COMPLETE')
-    
-    
+
+
     // COMMUNICATION & TRAINING
 
     console.log('ENTERING COMMUNICATION & TRAINING DATA...')
@@ -229,15 +229,37 @@ require('dotenv').config()
     await clickHandler('//*[@id="mat-radio-110"]/label/span[1]');
     await clickHandler('//*[@id="mat-radio-113"]/label/span[1]');
     await clickHandler('//*[@id="mat-radio-116"]/label/span[1]');
-    
+
     // Unsatisfactory Communication Radio Button 10
     await clickHandler('//*[@id="mat-radio-121"]/label/span[1]');
     await page.type(formControlComment, '***COMMUNICATION & TRAINING DISCREPANCY***');
 
-    
-    // Satisfactory Communication Radio Button 11
-    // await clickHandler('//*[@id="mat-radio-124"]/label/span[1]');
+    // Communication  Corrective Action Button
+    await clickHandler('//*[@id="mat-dialog-8"]/app-comment/div[2]/form/div[2]/div/button');
 
+    // Saves Communications Corrective Action Date
+    await correctiveActionDate();
+
+    await page.type(formControlCorAct, '***COMMUNICATIONS & TRAINING CORRECTIVE ACTION***');
+
+    // Saves Communications Corrective Action
+    await clickHandler('//*[@id="mat-dialog-10"]/app-corrective-action/form/div[3]/mat-icon');
+    
+    // Saves Communication Discrepancy
+    await clickHandler('//*[@id="mat-dialog-8"]/app-comment/div[2]/div/button[3]');
+
+    // Satisfactory Communication Radio Button 11
+    await clickHandler('//*[@id="mat-radio-124"]/label/span[1]');
+
+    await page.type('[formcontrolname=CommunicationComments]', '***COMMUNICATIONS & TRAINING ADDITIONAL COMMENTS***')
+
+    // Communications & Training Next Button
+    await clickHandler('//*[@id="cdk-accordion-child-4"]/div/div/button[2]');
+    console.log('COMMUNICATIONS & TRAINING COMPLETE');
+
+    // PERSONAL PROTECTIVE EQUIPMENT
+
+    
 
     // await page.waitForNetworkIdle();
     // page.close()
