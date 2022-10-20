@@ -65,6 +65,21 @@ require("dotenv").config();
   await clickHandler('//*[@id="mat-radio-6"]/label/span[1]/span[1]')
   await clickHandler('//*[@id="cdk-accordion-child-0"]/div/div/button')
 
+  //Details section 
 
+  await clickHandler('//*[@id="mat-checkbox-1"]/label/span[1]')
+  await page.type("[formcontrolname=comment]", "**TEST**")
+  await clickHandler('//*[@id="mat-dialog-0"]/app-comment/div[2]/form/div[2]/div/button')
+  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  await page.waitForXPath('//*[@id="ion-overlay-1"]/div[2]/div[1]/div[2]')
+  await clickHandler('//*[@id="ion-overlay-1"]/div[2]/div[1]/div[2]')
+  await page.click('[formcontrolname=CorrectiveActionRequired]')
+  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  await clickHandler('//*[@id="mat-dialog-1"]/app-corrective-action/form/div[3]/mat-icon')
+  
+
+
+  // await clickHandler('//*[@id="mat-checkbox-2"]/label/span[1]')
+  // await clickHandler('//*[@id="mat-checkbox-3"]/label/span[1]')
 
 })();
