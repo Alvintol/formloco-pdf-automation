@@ -171,6 +171,116 @@ require("dotenv").config();
   await page.waitForXPath('//*[@id="mat-dialog-14"]/app-comment/div[2]/div/button[3]')
   await clickHandler('//*[@id="mat-dialog-14"]/app-comment/div[2]/div/button[3]')
 
+  //Check Windshield Wipers/Washers sequence 
+  await clickHandler('//*[@id="mat-checkbox-9"]/label/span[1]')
+  await page.type("[formcontrolname=comment]", '**TEST**');
+  await clickHandler('//*[@id="mat-dialog-16"]/app-comment/div[2]/form/div[2]/div')
+  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  await page.waitForXPath('//*[@id="ion-overlay-9"]/div[2]/div[1]/div[2]')
+  await clickHandler('//*[@id="ion-overlay-9"]/div[2]/div[1]/div[2]')
+  await page.click('[formcontrolname=CorrectiveActionRequired]')
+  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  await clickHandler('//*[@id="mat-dialog-17"]/app-corrective-action/form/div[3]/mat-icon')
+  await page.waitForXPath('//*[@id="mat-dialog-16"]/app-comment/div[2]/div/button[3]')
+  await clickHandler('//*[@id="mat-dialog-16"]/app-comment/div[2]/div/button[3]')
+
+  //Check All Signal Lights sequence 
+  await clickHandler('//*[@id="mat-checkbox-10"]/label/span[1]')
+  await page.type("[formcontrolname=comment]", '**TEST**');
+  await clickHandler('//*[@id="mat-dialog-18"]/app-comment/div[2]/form/div[2]/div')
+  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  await page.waitForXPath('//*[@id="ion-overlay-10"]/div[2]/div[1]/div[2]')
+  await clickHandler('//*[@id="ion-overlay-10"]/div[2]/div[1]/div[2]')
+  await page.click('[formcontrolname=CorrectiveActionRequired]')
+  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  await clickHandler('//*[@id="mat-dialog-19"]/app-corrective-action/form/div[3]/mat-icon')
+  await page.waitForXPath('//*[@id="mat-dialog-18"]/app-comment/div[2]/div/button[3]')
+  await clickHandler('//*[@id="mat-dialog-18"]/app-comment/div[2]/div/button[3]')
+  
+  //Check Interior Lights sequence 
+  await clickHandler('//*[@id="mat-checkbox-11"]/label/span[1]')
+  await page.type("[formcontrolname=comment]", '**TEST**');
+  await clickHandler('//*[@id="mat-dialog-20"]/app-comment/div[2]/form/div[2]/div')
+  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  await page.waitForXPath('//*[@id="ion-overlay-11"]/div[2]/div[1]/div[2]')
+  await clickHandler('//*[@id="ion-overlay-11"]/div[2]/div[1]/div[2]')
+  await page.click('[formcontrolname=CorrectiveActionRequired]')
+  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  await clickHandler('//*[@id="mat-dialog-21"]/app-corrective-action/form/div[3]/mat-icon')
+  await page.waitForXPath('//*[@id="mat-dialog-20"]/app-comment/div[2]/div/button[3]')
+  await clickHandler('//*[@id="mat-dialog-20"]/app-comment/div[2]/div/button[3]')
+
+  //Check Mirrors for Damage and Adjustments
+  await clickHandler('//*[@id="mat-checkbox-12"]/label/span[1]')
+  await page.type("[formcontrolname=comment]", '**TEST**');
+  await clickHandler('//*[@id="mat-dialog-22"]/app-comment/div[2]/form/div[2]/div')
+  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  await page.waitForXPath('//*[@id="ion-overlay-12"]/div[2]/div[1]/div[2]')
+  await clickHandler('//*[@id="ion-overlay-12"]/div[2]/div[1]/div[2]')
+  await page.click('[formcontrolname=CorrectiveActionRequired]')
+  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  await clickHandler('//*[@id="mat-dialog-23"]/app-corrective-action/form/div[3]/mat-icon')
+  await page.waitForXPath('//*[@id="mat-dialog-22"]/app-comment/div[2]/div/button[3]')
+  await clickHandler('//*[@id="mat-dialog-22"]/app-comment/div[2]/div/button[3]')
+
+  //Windshield Clear Visibility, No Cracks sequence 
+  await clickHandler('//*[@id="mat-checkbox-13"]/label/span[1]')
+  await page.type("[formcontrolname=comment]", '**TEST**');
+  await clickHandler('//*[@id="mat-dialog-24"]/app-comment/div[2]/form/div[2]/div')
+  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  await page.waitForXPath('//*[@id="ion-overlay-13"]/div[2]/div[1]/div[2]')
+  await clickHandler('//*[@id="ion-overlay-13"]/div[2]/div[1]/div[2]')
+  await page.click('[formcontrolname=CorrectiveActionRequired]')
+  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  await clickHandler('//*[@id="mat-dialog-25"]/app-corrective-action/form/div[3]/mat-icon')
+  await page.waitForXPath('//*[@id="mat-dialog-24"]/app-comment/div[2]/div/button[3]')
+  await clickHandler('//*[@id="mat-dialog-24"]/app-comment/div[2]/div/button[3]')
+
+  //Visual Inspection for Exterior Damage/ Leaks Under Vehicle 
+  await clickHandler('//*[@id="mat-checkbox-14"]/label/span[1]')
+  await page.type("[formcontrolname=comment]", '**TEST**');
+  await clickHandler('//*[@id="mat-dialog-26"]/app-comment/div[2]/form/div[2]/div')
+  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  await page.waitForXPath('//*[@id="ion-overlay-14"]/div[2]/div[1]/div[2]')
+  await clickHandler('//*[@id="ion-overlay-14"]/div[2]/div[1]/div[2]')
+  await page.click('[formcontrolname=CorrectiveActionRequired]')
+  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  await clickHandler('//*[@id="mat-dialog-27"]/app-corrective-action/form/div[3]/mat-icon')
+  await page.waitForXPath('//*[@id="mat-dialog-26"]/app-comment/div[2]/div/button[3]')
+  await clickHandler('//*[@id="mat-dialog-26"]/app-comment/div[2]/div/button[3]')
+
+  //Check Inside Engine Compartment for Leaks/Loose Items
+  await clickHandler('//*[@id="mat-checkbox-15"]/label/span[1]')
+  await page.type("[formcontrolname=comment]", '**TEST**');
+  await clickHandler('//*[@id="mat-dialog-28"]/app-comment/div[2]/form/div[2]/div')
+  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  await page.waitForXPath('//*[@id="ion-overlay-15"]/div[2]/div[1]/div[2]')
+  await clickHandler('//*[@id="ion-overlay-15"]/div[2]/div[1]/div[2]')
+  await page.click('[formcontrolname=CorrectiveActionRequired]')
+  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  await clickHandler('//*[@id="mat-dialog-29"]/app-corrective-action/form/div[3]/mat-icon')
+  await page.waitForXPath('//*[@id="mat-dialog-28"]/app-comment/div[2]/div/button[3]')
+  await clickHandler('//*[@id="mat-dialog-28"]/app-comment/div[2]/div/button[3]')
+
+  //Start Engine & Check Transmission Fluid Level (Fluid should be hot) sequence 
+  await clickHandler('//*[@id="mat-checkbox-16"]/label/span[1]')
+  await page.type("[formcontrolname=comment]", '**TEST**');
+  await clickHandler('//*[@id="mat-dialog-30"]/app-comment/div[2]/form/div[2]/div')
+  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  await page.waitForXPath('//*[@id="ion-overlay-16"]/div[2]/div[1]/div[2]')
+  await clickHandler('//*[@id="ion-overlay-16"]/div[2]/div[1]/div[2]')
+  await page.click('[formcontrolname=CorrectiveActionRequired]')
+  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  await clickHandler('//*[@id="mat-dialog-31"]/app-corrective-action/form/div[3]/mat-icon')
+  await page.waitForXPath('//*[@id="mat-dialog-30"]/app-comment/div[2]/div/button[3]')
+  await clickHandler('//*[@id="mat-dialog-30"]/app-comment/div[2]/div/button[3]')
+
+  //Check Highlight/Signal lights/4way flashes/Tail Lights/ Backup Lights
+  
+
+
+
+
 
 
 
