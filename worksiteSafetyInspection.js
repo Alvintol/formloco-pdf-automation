@@ -236,11 +236,76 @@ require("dotenv").config();
   //finish JOB SITE MANAGEMENT 
   await clickHandler('//*[@id="cdk-accordion-child-2"]/div/div/button[2]')
 
+  //FIRE EXTINGUISHER(S) SECTION 
 
+  console.log("INPUTTING FIRE EXTINGUISHER(S) INFO...");
 
+  //20 lb minimum fire extinguisher available -- YES
+  await clickHandler('//*[@id="mat-radio-68"]/label/span[1]/span[1]')
 
+  //Fire extinguisher(s) tag attached Inspected monthly and recorded -- NO
+  await clickHandler('//*[@id="mat-radio-137"]/label/span[1]/span[1]')
+  await page.type("[formcontrolname=comment]", '**TEST**');
+  await clickHandler('//*[@id="mat-dialog-16"]/app-comment/div[2]/form/div[2]/div')
+  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  await page.waitForXPath('//*[@id="ion-overlay-9"]/div[2]/div[1]/div[2]')
+  await clickHandler('//*[@id="ion-overlay-9"]/div[2]/div[1]/div[2]')
+  await page.click('[formcontrolname=CorrectiveActionRequired]')
+  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  await clickHandler('//*[@id="mat-dialog-17"]/app-corrective-action/form/div[3]/mat-icon')
+  await page.waitForXPath('//*[@id="mat-dialog-16"]/app-comment/div[2]/div/button[3]')
+  await clickHandler('//*[@id="mat-dialog-16"]/app-comment/div[2]/div/button[3]')
 
+  //Fire extinguisher(s) visible and unobstructed -- YES
+  await clickHandler('//*[@id="mat-radio-139"]/label/span[1]/span[1]')
 
+  //Fire extinguishers showing charge (gauge indicator must be in the green zone indicating it is) -- NO 
+  await clickHandler('//*[@id="mat-radio-143"]/label/span[1]/span[1]')
+  await page.type("[formcontrolname=comment]", '**TEST**');
+  await clickHandler('//*[@id="mat-dialog-18"]/app-comment/div[2]/form/div[2]/div')
+  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  await page.waitForXPath('//*[@id="ion-overlay-10"]/div[2]/div[1]/div[2]')
+  await clickHandler('//*[@id="ion-overlay-10"]/div[2]/div[1]/div[2]')
+  await page.click('[formcontrolname=CorrectiveActionRequired]')
+  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  await clickHandler('//*[@id="mat-dialog-19"]/app-corrective-action/form/div[3]/mat-icon')
+  await page.waitForXPath('//*[@id="mat-dialog-18"]/app-comment/div[2]/div/button[3]')
+  await clickHandler('//*[@id="mat-dialog-18"]/app-comment/div[2]/div/button[3]')
+
+  //Fire extinguisher safety pins are in place and secured to prevent an accidental discharge -- YES
+  await clickHandler('//*[@id="mat-radio-145"]/label/span[1]/span[1]')
+
+  //Fire extinguishers operating instructions on the name plate are legible and face outwardss -- NO
+  await clickHandler('//*[@id="mat-radio-149"]/label/span[1]/span[1]')
+  await page.type("[formcontrolname=comment]", '**TEST**');
+  await clickHandler('//*[@id="mat-dialog-20"]/app-comment/div[2]/form/div[2]/div')
+  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  await page.waitForXPath('//*[@id="ion-overlay-11"]/div[2]/div[1]/div[2]')
+  await clickHandler('//*[@id="ion-overlay-11"]/div[2]/div[1]/div[2]')
+  await page.click('[formcontrolname=CorrectiveActionRequired]')
+  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  await clickHandler('//*[@id="mat-dialog-21"]/app-corrective-action/form/div[3]/mat-icon')
+  await page.waitForXPath('//*[@id="mat-dialog-20"]/app-comment/div[2]/div/button[3]')
+  await clickHandler('//*[@id="mat-dialog-20"]/app-comment/div[2]/div/button[3]')
+
+  //No signs of visible damage to fire extinguisher (rust, dents or other signs of damage) -- YES
+  await clickHandler('//*[@id="mat-radio-151"]/label/span[1]/span[1]')
+
+  //External fire extinguisher certification within 12 months (must be certified by 3rd party annually) -- NO
+  await clickHandler('//*[@id="mat-radio-155"]/label/span[1]/span[1]')
+  await page.type("[formcontrolname=comment]", '**TEST**');
+  await clickHandler('//*[@id="mat-dialog-22"]/app-comment/div[2]/form/div[2]/div')
+  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  await page.waitForXPath('//*[@id="ion-overlay-12"]/div[2]/div[1]/div[2]')
+  await clickHandler('//*[@id="ion-overlay-12"]/div[2]/div[1]/div[2]')
+  await page.click('[formcontrolname=CorrectiveActionRequired]')
+  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  await clickHandler('//*[@id="mat-dialog-23"]/app-corrective-action/form/div[3]/mat-icon')
+  await page.waitForXPath('//*[@id="mat-dialog-22"]/app-comment/div[2]/div/button[3]')
+  await clickHandler('//*[@id="mat-dialog-22"]/app-comment/div[2]/div/button[3]')
+  
+  //Finish Fire Extinguisher(s) section m
+  await clickHandler('//*[@id="cdk-accordion-child-3"]/div/div/button[2]')
 
 
 
