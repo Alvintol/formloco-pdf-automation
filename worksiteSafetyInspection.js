@@ -304,14 +304,54 @@ require("dotenv").config();
   await page.waitForXPath('//*[@id="mat-dialog-22"]/app-comment/div[2]/div/button[3]')
   await clickHandler('//*[@id="mat-dialog-22"]/app-comment/div[2]/div/button[3]')
   
-  //Finish Fire Extinguisher(s) section m
+  //Finish Fire Extinguisher(s) section 
   await clickHandler('//*[@id="cdk-accordion-child-3"]/div/div/button[2]')
 
+  //Emergency Response PLanning 
+  console.log('INPUTTING EMERGENCY RESPONSE PLANNING...');
 
+  //Emergency Response Plan (ERP) Onsite -- YES
+  await clickHandler('//*[@id="mat-radio-71"]/label/span[1]/span[1]')
+  await page.waitForXPath('//*[@id="cdk-overlay-28"]/mat-bottom-sheet-container/app-bottom-sheet-worksite-safety-inspection/div[2]/button[1]')
+  await clickHandler('//*[@id="cdk-overlay-28"]/mat-bottom-sheet-container/app-bottom-sheet-worksite-safety-inspection/div[2]/button[1]')
 
+  //ERP Plannin g-- NO 
+  await clickHandler('//*[@id="mat-radio-158"]/label/span[1]/span[1]')
+  await page.type("[formcontrolname=comment]", '**TEST**');
+  await clickHandler('//*[@id="mat-dialog-24"]/app-comment/div[2]/form/div[2]/div')
+  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  await page.waitForXPath('//*[@id="ion-overlay-13"]/div[2]/div[1]/div[2]')
+  await clickHandler('//*[@id="ion-overlay-13"]/div[2]/div[1]/div[2]')
+  await page.click('[formcontrolname=CorrectiveActionRequired]')
+  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  await clickHandler('//*[@id="mat-dialog-25"]/app-corrective-action/form/div[3]/mat-icon')
+  await page.waitForXPath('//*[@id="mat-dialog-24"]/app-comment/div[2]/div/button[3]')
+  await clickHandler('//*[@id="mat-dialog-24"]/app-comment/div[2]/div/button[3]')
 
+  //ERP includes directions to nearest hospital -- YES 
+  await clickHandler('//*[@id="mat-radio-160"]/label/span[1]/span[1]')
 
+  //STARS # (if applicable) -- N/A 
+  await clickHandler('//*[@id="mat-radio-165"]/label/span[1]/span[1]')
 
+  //ERP responder roles and responsibilities identified -- YES
+  await clickHandler('//*[@id="mat-radio-167"]/label/span[1]/span[1]')
+
+  //Cellular or radio coverage confirmed. If no, what communication is in place? -- NO 
+  await clickHandler('//*[@id="mat-radio-171"]/label/span[1]/span[1]')
+  await page.type("[formcontrolname=comment]", '**TEST**');
+  await clickHandler('//*[@id="mat-dialog-26"]/app-comment/div[2]/form/div[2]/div/button')
+  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  await page.waitForXPath('//*[@id="ion-overlay-14"]/div[2]/div[1]/div[2]')
+  await clickHandler('//*[@id="ion-overlay-14"]/div[2]/div[1]/div[2]')
+  await page.click('[formcontrolname=CorrectiveActionRequired]')
+  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  await clickHandler('//*[@id="mat-dialog-27"]/app-corrective-action/form/div[3]/mat-icon')
+  await page.waitForXPath('//*[@id="mat-dialog-26"]/app-comment/div[2]/div/button[3]')
+  await clickHandler('//*[@id="mat-dialog-26"]/app-comment/div[2]/div/button[3]')
+
+  //Finish Emergency Response Planning section 
+  await clickHandler('//*[@id="cdk-accordion-child-4"]/div/div/button[2]')
 
 
 
