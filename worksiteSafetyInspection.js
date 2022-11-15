@@ -4,6 +4,16 @@ require("dotenv").config();
 
   const { URL, EMAIL, PASSWORD } = process.env;
 
+  const formController = {
+    hazardIdentification: false, 
+    jobSiteManagement: false, 
+    fireExtinguishers: false, 
+    emergencyResponsePlanning: false, 
+    groundDisturbance: false,
+    confinedSpaceEntry: false,
+
+  }
+
   const browser = await puppeteer.launch({ headless: false });
 
   const page = await browser.newPage();
@@ -65,19 +75,19 @@ require("dotenv").config();
   const starsSiteNumber = "[id=mat-input-11]"
 
   await page.type(workerCompletingInspection, 'Form Loco')
-  await clickHandler('//*[@id="mat-option-87"]/span')
+  await clickHandler('//*[@id="mat-option-87"]')
   await page.type(supervisorName, 'Alvin')
-  await clickHandler('//*[@id="mat-option-137"]/span')
+  await clickHandler('//*[@id="mat-option-138"]')
   await page.type(supervisorPhone, '000-000-0000')
   await clickHandler('//*[@id="mat-input-5"]')
-  await page.waitForXPath('//*[@id="mat-option-139"]/span')
-  await clickHandler('//*[@id="mat-option-139"]/span')
+  await page.waitForXPath('//*[@id="mat-option-143"]')
+  await clickHandler('//*[@id="mat-option-143"]')
   await page.type(worksiteLocation, 'Canada')
   await page.type(lsdUwi, '4638-hsjd')
   await page.type(jobProjectNumber, '87654')
   await clickHandler('//*[@id="mat-select-value-1"]/span')
-  await page.waitForXPath('//*[@id="mat-option-255"]/span')
-  await clickHandler('//*[@id="mat-option-255"]/span')
+  await page.waitForXPath('//*[@id="mat-option-258"]')
+  await clickHandler('//*[@id="mat-option-258"]')
   await page.type(starsSiteNumber, '8329304')
   await page.type('[formcontrolname=ScopeOfWork]', 'check-up and registration')
 
@@ -86,11 +96,11 @@ require("dotenv").config();
   await clickHandler('//*[@id="cdk-accordion-child-0"]/div/div/button')
   
   
-
   //HAZARD INDICATION & COMMUNICATION 
   console.log('FILLING OUT HAZARD INDICATION & COMMUNICATION');
 
-  //Site hazard assessment completed - YES 
+  if (formController.hazardIdentification) {
+    //Site hazard assessment completed - YES 
   await clickHandler('//*[@id="mat-radio-2"]/label/span[1]')
 
   //Scope of work for the project clearly defined - NO 
@@ -157,90 +167,125 @@ require("dotenv").config();
   //Finish HAZARD INDICATION & COMMUNICATION section 
   await clickHandler('//*[@id="cdk-accordion-child-1"]/div/div/button[2]')
 
-  //JOB SITE MANAGEMENT 
-  console.log('FILLING OUT JOB SITE MANAGEMENT');
+  } else {
 
-  //Work area is clearly defined -- YES
-  await clickHandler('//*[@id="mat-radio-26"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-2"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-5"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-8"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-11"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-14"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-17"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-20"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-23"]/label/span[1]/span[1]')
 
-  //Site is free of trip hazards and other housekeeping concerns -- NO 
-  await clickHandler('//*[@id="mat-radio-31"]/label/span[1]/span[1]')
-  await page.type('[formcontrolname=comment]', '**TEST**')
-  await clickHandler('//*[@id="mat-dialog-8"]/app-comment/div[2]/form/div[2]/div')
-  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
-  await page.waitForXPath('//*[@id="ion-overlay-5"]/div[2]/div[1]/div[2]')
-  await clickHandler('//*[@id="ion-overlay-5"]/div[2]/div[1]/div[2]')
-  await page.click('[formcontrolname=CorrectiveActionRequired]')
-  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
-  await clickHandler('//*[@id="mat-dialog-9"]/app-corrective-action/form/div[3]/mat-icon')
-  await page.waitForXPath('//*[@id="mat-dialog-8"]/app-comment/div[2]/div/button[3]')
-  await clickHandler('//*[@id="mat-dialog-8"]/app-comment/div[2]/div/button[3]')
+    await clickHandler('//*[@id="cdk-accordion-child-1"]/div/div/button[2]')
 
-  //All open excavations are clearly marked -- N/A
-  await clickHandler('//*[@id="mat-radio-35"]/label/span[1]/span[1]')
-
-  //Public access to the site controlled -- YES 
-  await clickHandler('//*[@id="mat-radio-37"]/label/span[1]/span[1]')
-
-  //Prime contractor clearly identified with signage -- NO 
-  await clickHandler('//*[@id="mat-radio-42"]/label/span[1]/span[1]')
-  await page.type("[formcontrolname=comment]", '**TEST**');
-  await clickHandler('//*[@id="mat-dialog-10"]/app-comment/div[2]/form/div[2]/div')
-  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
-  await page.waitForXPath('//*[@id="ion-overlay-6"]/div[2]/div[1]/div[2]')
-  await clickHandler('//*[@id="ion-overlay-6"]/div[2]/div[1]/div[2]')
-  await page.click('[formcontrolname=CorrectiveActionRequired]')
-  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
-  await clickHandler('//*[@id="mat-dialog-11"]/app-corrective-action/form/div[3]/mat-icon')
-  await page.waitForXPath('//*[@id="mat-dialog-10"]/app-comment/div[2]/div/button[3]')
-  await clickHandler('//*[@id="mat-dialog-10"]/app-comment/div[2]/div/button[3]')
-
-  //Is there emergency equipment on site? -- N/A
-  await clickHandler('//*[@id="mat-radio-47"]/label/span[1]/span[1]')
+  }
   
-  //First aid kit available and stocked -- YES 
-  await clickHandler('//*[@id="mat-radio-49"]/label/span[1]/span[1]')
+  //JOB SITE MANAGEMENT 
+    console.log('FILLING OUT JOB SITE MANAGEMENT');
 
-  //Blankets and stretcher available -- NO 
-  await clickHandler('//*[@id="mat-radio-53"]/label/span[1]/span[1]')
-  await page.type("[formcontrolname=comment]", '**TEST**');
-  await clickHandler('//*[@id="mat-dialog-12"]/app-comment/div[2]/form/div[2]/div')
-  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
-  await page.waitForXPath('//*[@id="ion-overlay-7"]/div[2]/div[1]/div[2]')
-  await clickHandler('//*[@id="ion-overlay-7"]/div[2]/div[1]/div[2]')
-  await page.click('[formcontrolname=CorrectiveActionRequired]')
-  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
-  await clickHandler('//*[@id="mat-dialog-13"]/app-corrective-action/form/div[3]/mat-icon')
-  await page.waitForXPath('//*[@id="mat-dialog-12"]/app-comment/div[2]/div/button[3]')
-  await clickHandler('//*[@id="mat-dialog-12"]/app-comment/div[2]/div/button[3]')
+  if (formController.jobSiteManagement) {
 
-  //Eye wash bottle available -- YES 
-  await clickHandler('//*[@id="mat-radio-56"]/label/span[1]/span[1]')
+    //Work area is clearly defined -- YES
+    await clickHandler('//*[@id="mat-radio-26"]/label/span[1]/span[1]')
 
-  //Spill kit available -- N/A 
-  await clickHandler('//*[@id="mat-radio-62"]/label/span[1]/span[1]')
+    //Site is free of trip hazards and other housekeeping concerns -- NO 
+    await clickHandler('//*[@id="mat-radio-31"]/label/span[1]/span[1]')
+    await page.type('[formcontrolname=comment]', '**TEST**')
+    await clickHandler('//*[@id="mat-dialog-8"]/app-comment/div[2]/form/div[2]/div')
+    await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+    await page.waitForXPath('//*[@id="ion-overlay-5"]/div[2]/div[1]/div[2]')
+    await clickHandler('//*[@id="ion-overlay-5"]/div[2]/div[1]/div[2]')
+    await page.click('[formcontrolname=CorrectiveActionRequired]')
+    await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+    await clickHandler('//*[@id="mat-dialog-9"]/app-corrective-action/form/div[3]/mat-icon')
+    await page.waitForXPath('//*[@id="mat-dialog-8"]/app-comment/div[2]/div/button[3]')
+    await clickHandler('//*[@id="mat-dialog-8"]/app-comment/div[2]/div/button[3]')
 
-  //The H2S personal gas monitors onsite have been bumped -- NO
-  await clickHandler('//*[@id="mat-radio-65"]/label/span[1]/span[1]')
-  await page.type("[formcontrolname=comment]", '**TEST**');
-  await clickHandler('//*[@id="mat-dialog-14"]/app-comment/div[2]/form/div[2]/div')
-  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
-  await page.waitForXPath('//*[@id="ion-overlay-8"]/div[2]/div[1]/div[2]')
-  await clickHandler('//*[@id="ion-overlay-8"]/div[2]/div[1]/div[2]')
-  await page.click('[formcontrolname=CorrectiveActionRequired]')
-  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
-  await clickHandler('//*[@id="mat-dialog-15"]/app-corrective-action/form/div[3]/mat-icon')
-  await page.waitForXPath('//*[@id="mat-dialog-14"]/app-comment/div[2]/div/button[3]')
-  await clickHandler('//*[@id="mat-dialog-14"]/app-comment/div[2]/div/button[3]')
+    //All open excavations are clearly marked -- N/A
+    await clickHandler('//*[@id="mat-radio-35"]/label/span[1]/span[1]')
 
-  //finish JOB SITE MANAGEMENT 
-  await clickHandler('//*[@id="cdk-accordion-child-2"]/div/div/button[2]')
+    //Public access to the site controlled -- YES 
+    await clickHandler('//*[@id="mat-radio-37"]/label/span[1]/span[1]')
+
+    //Prime contractor clearly identified with signage -- NO 
+    await clickHandler('//*[@id="mat-radio-42"]/label/span[1]/span[1]')
+    await page.type("[formcontrolname=comment]", '**TEST**');
+    await clickHandler('//*[@id="mat-dialog-10"]/app-comment/div[2]/form/div[2]/div')
+    await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+    await page.waitForXPath('//*[@id="ion-overlay-6"]/div[2]/div[1]/div[2]')
+    await clickHandler('//*[@id="ion-overlay-6"]/div[2]/div[1]/div[2]')
+    await page.click('[formcontrolname=CorrectiveActionRequired]')
+    await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+    await clickHandler('//*[@id="mat-dialog-11"]/app-corrective-action/form/div[3]/mat-icon')
+    await page.waitForXPath('//*[@id="mat-dialog-10"]/app-comment/div[2]/div/button[3]')
+    await clickHandler('//*[@id="mat-dialog-10"]/app-comment/div[2]/div/button[3]')
+
+    //Is there emergency equipment on site? -- N/A
+    await clickHandler('//*[@id="mat-radio-47"]/label/span[1]/span[1]')
+    
+    //First aid kit available and stocked -- YES 
+    await clickHandler('//*[@id="mat-radio-49"]/label/span[1]/span[1]')
+
+    //Blankets and stretcher available -- NO 
+    await clickHandler('//*[@id="mat-radio-53"]/label/span[1]/span[1]')
+    await page.type("[formcontrolname=comment]", '**TEST**');
+    await clickHandler('//*[@id="mat-dialog-12"]/app-comment/div[2]/form/div[2]/div')
+    await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+    await page.waitForXPath('//*[@id="ion-overlay-7"]/div[2]/div[1]/div[2]')
+    await clickHandler('//*[@id="ion-overlay-7"]/div[2]/div[1]/div[2]')
+    await page.click('[formcontrolname=CorrectiveActionRequired]')
+    await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+    await clickHandler('//*[@id="mat-dialog-13"]/app-corrective-action/form/div[3]/mat-icon')
+    await page.waitForXPath('//*[@id="mat-dialog-12"]/app-comment/div[2]/div/button[3]')
+    await clickHandler('//*[@id="mat-dialog-12"]/app-comment/div[2]/div/button[3]')
+
+    //Eye wash bottle available -- YES 
+    await clickHandler('//*[@id="mat-radio-56"]/label/span[1]/span[1]')
+
+    //Spill kit available -- N/A 
+    await clickHandler('//*[@id="mat-radio-62"]/label/span[1]/span[1]')
+
+    //The H2S personal gas monitors onsite have been bumped -- NO
+    await clickHandler('//*[@id="mat-radio-65"]/label/span[1]/span[1]')
+    await page.type("[formcontrolname=comment]", '**TEST**');
+    await clickHandler('//*[@id="mat-dialog-14"]/app-comment/div[2]/form/div[2]/div')
+    await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+    await page.waitForXPath('//*[@id="ion-overlay-8"]/div[2]/div[1]/div[2]')
+    await clickHandler('//*[@id="ion-overlay-8"]/div[2]/div[1]/div[2]')
+    await page.click('[formcontrolname=CorrectiveActionRequired]')
+    await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+    await clickHandler('//*[@id="mat-dialog-15"]/app-corrective-action/form/div[3]/mat-icon')
+    await page.waitForXPath('//*[@id="mat-dialog-14"]/app-comment/div[2]/div/button[3]')
+    await clickHandler('//*[@id="mat-dialog-14"]/app-comment/div[2]/div/button[3]')
+
+    //finish JOB SITE MANAGEMENT 
+    await clickHandler('//*[@id="cdk-accordion-child-2"]/div/div/button[2]')
+
+  } else {
+
+    await clickHandler('//*[@id="mat-radio-26"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-30"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-33"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-37"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-41"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-45"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-49"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-52"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-56"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-60"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-64"]/label/span[1]/span[1]')
+
+    await clickHandler('//*[@id="cdk-accordion-child-2"]/div/div/button[2]')
+
+  }
 
   //FIRE EXTINGUISHER(S) SECTION 
-
   console.log("INPUTTING FIRE EXTINGUISHER(S) INFO...");
 
-  //20 lb minimum fire extinguisher available -- YES
+  if (formController.fireExtinguishers) {
+    //20 lb minimum fire extinguisher available -- YES
   await clickHandler('//*[@id="mat-radio-68"]/label/span[1]/span[1]')
 
   //Fire extinguisher(s) tag attached Inspected monthly and recorded -- NO
@@ -307,15 +352,32 @@ require("dotenv").config();
   //Finish Fire Extinguisher(s) section 
   await clickHandler('//*[@id="cdk-accordion-child-3"]/div/div/button[2]')
 
+  } else {
+
+    await clickHandler('//*[@id="mat-radio-68"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-136"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-139"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-142"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-145"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-148"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-151"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-154"]/label/span[1]/span[1]')
+
+    await clickHandler('//*[@id="cdk-accordion-child-3"]/div/div/button[2]')
+
+  }
+
   //Emergency Response PLanning 
   console.log('INPUTTING EMERGENCY RESPONSE PLANNING...');
+
+  if (formController.emergencyResponsePlanning) {
 
   //Emergency Response Plan (ERP) Onsite -- YES
   await clickHandler('//*[@id="mat-radio-71"]/label/span[1]/span[1]')
   await page.waitForXPath('//*[@id="cdk-overlay-28"]/mat-bottom-sheet-container/app-bottom-sheet-worksite-safety-inspection/div[2]/button[1]')
   await clickHandler('//*[@id="cdk-overlay-28"]/mat-bottom-sheet-container/app-bottom-sheet-worksite-safety-inspection/div[2]/button[1]')
 
-  //ERP Plannin g-- NO 
+  //ERP Planning-- NO 
   await clickHandler('//*[@id="mat-radio-158"]/label/span[1]/span[1]')
   await page.type("[formcontrolname=comment]", '**TEST**');
   await clickHandler('//*[@id="mat-dialog-24"]/app-comment/div[2]/form/div[2]/div')
@@ -353,10 +415,26 @@ require("dotenv").config();
   //Finish Emergency Response Planning section 
   await clickHandler('//*[@id="cdk-accordion-child-4"]/div/div/button[2]')
 
+  } else {
+
+    await clickHandler('//*[@id="mat-radio-71"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-157"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-160"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-163"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-167"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-170"]/label/span[1]/span[1]')
+
+    await clickHandler('//*[@id="cdk-accordion-child-4"]/div/div/button[2]')
+
+  }
+
+  
   //Ground Disturbances 
   console.log('INPUTTING GROUND DISTURBANCE INFO...');
 
-  //Does the project involve ground disturbances -- YES 
+  if (formController.groundDisturbance) {
+
+    //Does the project involve ground disturbances -- YES 
   await clickHandler('//*[@id="mat-radio-75"]/label/span[1]/span[1]')
 
   //Ground disturbance checklist is in place -- NO 
@@ -411,219 +489,257 @@ require("dotenv").config();
   // //Hit next button
   await clickHandler('//*[@id="cdk-accordion-child-5"]/div/div/button[2]')
 
+  } else {
+
+    await clickHandler('//*[@id="mat-radio-75"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-174"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-177"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-180"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-183"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-186"]/label/span[1]/span[1]')
+    await clickHandler('//*[@id="mat-radio-189"]/label/span[1]/span[1]')
+
+    await clickHandler('//*[@id="cdk-accordion-child-5"]/div/div/button[2]')
+
+    
+  }
+
   //START CONFINED SPACE ENTRY 
   console.log('START CONFINED SPACE ENTRY');
 
-  //Does the project involve Confined Space Entry? 
-  await clickHandler('//*[@id="mat-radio-78"]/label/span[1]/span[1]')
+  if ()
 
-  //Confined Space Permit Issued -- NO 
-  await clickHandler('//*[@id="mat-radio-193"]/label/span[1]/span[1]')
-  await page.type("[formcontrolname=comment]", '**TEST**');
-  await clickHandler('//*[@id="mat-dialog-34"]/app-comment/div[2]/form/div[2]/div')
-  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
-  await page.waitForXPath('//*[@id="ion-overlay-18"]/div[2]/div[1]/div[2]')
-  await clickHandler('//*[@id="ion-overlay-18"]/div[2]/div[1]/div[2]')
-  await page.click('[formcontrolname=CorrectiveActionRequired]')
-  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
-  await clickHandler('//*[@id="mat-dialog-35"]/app-corrective-action/form/div[3]/mat-icon')
-  await page.waitForXPath('//*[@id="mat-dialog-34"]/app-comment/div[2]/div/button[3]')
-  await clickHandler('//*[@id="mat-dialog-34"]/app-comment/div[2]/div/button[3]')
+  // //Does the project involve Confined Space Entry? 
+  // await clickHandler('//*[@id="mat-radio-78"]/label/span[1]/span[1]')
 
-  //Workers have applicable safety traning and competent to perform the work -- NO 
-  await clickHandler('//*[@id="mat-radio-196"]/label/span[1]/span[1]')
-  await page.type("[formcontrolname=comment]", '**TEST**');
-  await clickHandler('//*[@id="mat-dialog-36"]/app-comment/div[2]/form/div[2]/div')
-  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
-  await page.waitForXPath('//*[@id="ion-overlay-19"]/div[2]/div[1]/div[2]')
-  await clickHandler('//*[@id="ion-overlay-19"]/div[2]/div[1]/div[2]')
-  await page.click('[formcontrolname=CorrectiveActionRequired]')
-  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
-  await clickHandler('//*[@id="mat-dialog-37"]/app-corrective-action/form/div[3]/mat-icon')
-  await page.waitForXPath('//*[@id="mat-dialog-36"]/app-comment/div[2]/div/button[3]')
-  await clickHandler('//*[@id="mat-dialog-36"]/app-comment/div[2]/div/button[3]')
+  // //Confined Space Permit Issued -- NO 
+  // await clickHandler('//*[@id="mat-radio-193"]/label/span[1]/span[1]')
+  // await page.type("[formcontrolname=comment]", '**TEST**');
+  // await clickHandler('//*[@id="mat-dialog-34"]/app-comment/div[2]/form/div[2]/div')
+  // await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  // await page.waitForXPath('//*[@id="ion-overlay-18"]/div[2]/div[1]/div[2]')
+  // await clickHandler('//*[@id="ion-overlay-18"]/div[2]/div[1]/div[2]')
+  // await page.click('[formcontrolname=CorrectiveActionRequired]')
+  // await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  // await clickHandler('//*[@id="mat-dialog-35"]/app-corrective-action/form/div[3]/mat-icon')
+  // await page.waitForXPath('//*[@id="mat-dialog-34"]/app-comment/div[2]/div/button[3]')
+  // await clickHandler('//*[@id="mat-dialog-34"]/app-comment/div[2]/div/button[3]')
 
-  //Safety Watch in place -- NO 
-  await clickHandler('//*[@id="mat-radio-199"]/label/span[1]/span[1]')
-  await page.type("[formcontrolname=comment]", '**TEST**');
-  await clickHandler('//*[@id="mat-dialog-38"]/app-comment/div[2]/form/div[2]/div')
-  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
-  await page.waitForXPath('//*[@id="ion-overlay-20"]/div[2]/div[1]/div[2]')
-  await clickHandler('//*[@id="ion-overlay-20"]/div[2]/div[1]/div[2]')
-  await page.click('[formcontrolname=CorrectiveActionRequired]')
-  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
-  await clickHandler('//*[@id="mat-dialog-39"]/app-corrective-action/form/div[3]/mat-icon')
-  await page.waitForXPath('//*[@id="mat-dialog-38"]/app-comment/div[2]/div/button[3]')
-  await clickHandler('//*[@id="mat-dialog-38"]/app-comment/div[2]/div/button[3]')
+  // //Workers have applicable safety traning and competent to perform the work -- NO 
+  // await clickHandler('//*[@id="mat-radio-196"]/label/span[1]/span[1]')
+  // await page.type("[formcontrolname=comment]", '**TEST**');
+  // await clickHandler('//*[@id="mat-dialog-36"]/app-comment/div[2]/form/div[2]/div')
+  // await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  // await page.waitForXPath('//*[@id="ion-overlay-19"]/div[2]/div[1]/div[2]')
+  // await clickHandler('//*[@id="ion-overlay-19"]/div[2]/div[1]/div[2]')
+  // await page.click('[formcontrolname=CorrectiveActionRequired]')
+  // await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  // await clickHandler('//*[@id="mat-dialog-37"]/app-corrective-action/form/div[3]/mat-icon')
+  // await page.waitForXPath('//*[@id="mat-dialog-36"]/app-comment/div[2]/div/button[3]')
+  // await clickHandler('//*[@id="mat-dialog-36"]/app-comment/div[2]/div/button[3]')
 
-  //Rescue plan available -- NO
-  await clickHandler('//*[@id="mat-radio-202"]/label/span[1]/span[1]')
-  await page.type("[formcontrolname=comment]", '**TEST**');
-  await clickHandler('//*[@id="mat-dialog-40"]/app-comment/div[2]/form/div[2]/div/button')
-  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
-  await page.waitForXPath('//*[@id="ion-overlay-21"]/div[2]/div[1]/div[2]')
-  await clickHandler('//*[@id="ion-overlay-21"]/div[2]/div[1]/div[2]')
-  await page.click('[formcontrolname=CorrectiveActionRequired]')
-  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
-  await clickHandler('//*[@id="mat-dialog-41"]/app-corrective-action/form/div[3]/mat-icon')
-  await page.waitForXPath('//*[@id="mat-dialog-40"]/app-comment/div[2]/div/button[3]')
-  await clickHandler('//*[@id="mat-dialog-40"]/app-comment/div[2]/div/button[3]')
+  // //Safety Watch in place -- NO 
+  // await clickHandler('//*[@id="mat-radio-199"]/label/span[1]/span[1]')
+  // await page.type("[formcontrolname=comment]", '**TEST**');
+  // await clickHandler('//*[@id="mat-dialog-38"]/app-comment/div[2]/form/div[2]/div')
+  // await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  // await page.waitForXPath('//*[@id="ion-overlay-20"]/div[2]/div[1]/div[2]')
+  // await clickHandler('//*[@id="ion-overlay-20"]/div[2]/div[1]/div[2]')
+  // await page.click('[formcontrolname=CorrectiveActionRequired]')
+  // await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  // await clickHandler('//*[@id="mat-dialog-39"]/app-corrective-action/form/div[3]/mat-icon')
+  // await page.waitForXPath('//*[@id="mat-dialog-38"]/app-comment/div[2]/div/button[3]')
+  // await clickHandler('//*[@id="mat-dialog-38"]/app-comment/div[2]/div/button[3]')
 
-  //Click next button
-  await clickHandler('//*[@id="cdk-accordion-child-6"]/div/div/button[2]')
+  // //Rescue plan available -- NO
+  // await clickHandler('//*[@id="mat-radio-202"]/label/span[1]/span[1]')
+  // await page.type("[formcontrolname=comment]", '**TEST**');
+  // await clickHandler('//*[@id="mat-dialog-40"]/app-comment/div[2]/form/div[2]/div/button')
+  // await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  // await page.waitForXPath('//*[@id="ion-overlay-21"]/div[2]/div[1]/div[2]')
+  // await clickHandler('//*[@id="ion-overlay-21"]/div[2]/div[1]/div[2]')
+  // await page.click('[formcontrolname=CorrectiveActionRequired]')
+  // await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  // await clickHandler('//*[@id="mat-dialog-41"]/app-corrective-action/form/div[3]/mat-icon')
+  // await page.waitForXPath('//*[@id="mat-dialog-40"]/app-comment/div[2]/div/button[3]')
+  // await clickHandler('//*[@id="mat-dialog-40"]/app-comment/div[2]/div/button[3]')
 
-  //START HOT WORK FORM 
-  console.log('START HOT WORK FORM');
+  // //Click next button
+  // await clickHandler('//*[@id="cdk-accordion-child-6"]/div/div/button[2]')
 
-  //Does the project involve hot work... -- YES
-  await clickHandler('//*[@id="mat-radio-81"]/label/span[1]/span[1]')
+  // //START HOT WORK FORM 
+  // console.log('START HOT WORK FORM');
 
-  //Hot work permit issued 
-  await clickHandler('//*[@id="mat-radio-205"]/label/span[1]/span[1]')
-  await page.type("[formcontrolname=comment]", '**TEST**');
-  await clickHandler('//*[@id="mat-dialog-42"]/app-comment/div[2]/form/div[2]/div')
-  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
-  await page.waitForXPath('//*[@id="ion-overlay-22"]/div[2]/div[1]/div[2]')
-  await clickHandler('//*[@id="ion-overlay-22"]/div[2]/div[1]/div[2]')
-  await page.click('[formcontrolname=CorrectiveActionRequired]')
-  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
-  await clickHandler('//*[@id="mat-dialog-43"]/app-corrective-action/form/div[3]/mat-icon')
-  await page.waitForXPath('//*[@id="mat-dialog-42"]/app-comment/div[2]/div/button[3]')
-  await clickHandler('//*[@id="mat-dialog-42"]/app-comment/div[2]/div/button[3]')
+  // //Does the project involve hot work... -- YES
+  // await clickHandler('//*[@id="mat-radio-81"]/label/span[1]/span[1]')
 
-  //Fire hazards identified and controls in place -- NO
-  await clickHandler('//*[@id="mat-radio-208"]/label/span[1]/span[1]')
-  await page.type("[formcontrolname=comment]", '**TEST**');
-  await clickHandler('//*[@id="mat-dialog-44"]/app-comment/div[2]/form/div[2]/div')
-  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
-  await page.waitForXPath('//*[@id="ion-overlay-23"]/div[2]/div[1]/div[2]')
-  await clickHandler('//*[@id="ion-overlay-23"]/div[2]/div[1]/div[2]')
-  await page.click('[formcontrolname=CorrectiveActionRequired]')
-  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
-  await clickHandler('//*[@id="mat-dialog-45"]/app-corrective-action/form/div[3]/mat-icon')
-  await page.waitForXPath('//*[@id="mat-dialog-44"]/app-comment/div[2]/div/button[3]')
-  await clickHandler('//*[@id="mat-dialog-44"]/app-comment/div[2]/div/button[3]')
+  // //Hot work permit issued 
+  // await clickHandler('//*[@id="mat-radio-205"]/label/span[1]/span[1]')
+  // await page.type("[formcontrolname=comment]", '**TEST**');
+  // await clickHandler('//*[@id="mat-dialog-42"]/app-comment/div[2]/form/div[2]/div')
+  // await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  // await page.waitForXPath('//*[@id="ion-overlay-22"]/div[2]/div[1]/div[2]')
+  // await clickHandler('//*[@id="ion-overlay-22"]/div[2]/div[1]/div[2]')
+  // await page.click('[formcontrolname=CorrectiveActionRequired]')
+  // await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  // await clickHandler('//*[@id="mat-dialog-43"]/app-corrective-action/form/div[3]/mat-icon')
+  // await page.waitForXPath('//*[@id="mat-dialog-42"]/app-comment/div[2]/div/button[3]')
+  // await clickHandler('//*[@id="mat-dialog-42"]/app-comment/div[2]/div/button[3]')
 
-  //Fire/Safety watch available 
-  await clickHandler('//*[@id="mat-radio-211"]/label/span[1]/span[1]')
-  await page.type("[formcontrolname=comment]", '**TEST**');
-  await clickHandler('//*[@id="mat-dialog-46"]/app-comment/div[2]/form/div[2]/div')
-  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
-  await page.waitForXPath('//*[@id="ion-overlay-24"]/div[2]/div[1]/div[2]')
-  await clickHandler('//*[@id="ion-overlay-24"]/div[2]/div[1]/div[2]')
-  await page.click('[formcontrolname=CorrectiveActionRequired]')
-  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**') 
-  await clickHandler('//*[@id="mat-dialog-47"]/app-corrective-action/form/div[3]/mat-icon')
-  await page.waitForXPath('//*[@id="mat-dialog-46"]/app-comment/div[2]/div/button[3]')
-  await clickHandler('//*[@id="mat-dialog-46"]/app-comment/div[2]/div/button[3]')
+  // //Fire hazards identified and controls in place -- NO
+  // await clickHandler('//*[@id="mat-radio-208"]/label/span[1]/span[1]')
+  // await page.type("[formcontrolname=comment]", '**TEST**');
+  // await clickHandler('//*[@id="mat-dialog-44"]/app-comment/div[2]/form/div[2]/div')
+  // await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  // await page.waitForXPath('//*[@id="ion-overlay-23"]/div[2]/div[1]/div[2]')
+  // await clickHandler('//*[@id="ion-overlay-23"]/div[2]/div[1]/div[2]')
+  // await page.click('[formcontrolname=CorrectiveActionRequired]')
+  // await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  // await clickHandler('//*[@id="mat-dialog-45"]/app-corrective-action/form/div[3]/mat-icon')
+  // await page.waitForXPath('//*[@id="mat-dialog-44"]/app-comment/div[2]/div/button[3]')
+  // await clickHandler('//*[@id="mat-dialog-44"]/app-comment/div[2]/div/button[3]')
 
-  //Click next button
-  await clickHandler('//*[@id="cdk-accordion-child-7"]/div/div/button[2]')
+  // //Fire/Safety watch available 
+  // await clickHandler('//*[@id="mat-radio-211"]/label/span[1]/span[1]')
+  // await page.type("[formcontrolname=comment]", '**TEST**');
+  // await clickHandler('//*[@id="mat-dialog-46"]/app-comment/div[2]/form/div[2]/div')
+  // await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  // await page.waitForXPath('//*[@id="ion-overlay-24"]/div[2]/div[1]/div[2]')
+  // await clickHandler('//*[@id="ion-overlay-24"]/div[2]/div[1]/div[2]')
+  // await page.click('[formcontrolname=CorrectiveActionRequired]')
+  // await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**') 
+  // await clickHandler('//*[@id="mat-dialog-47"]/app-corrective-action/form/div[3]/mat-icon')
+  // await page.waitForXPath('//*[@id="mat-dialog-46"]/app-comment/div[2]/div/button[3]')
+  // await clickHandler('//*[@id="mat-dialog-46"]/app-comment/div[2]/div/button[3]')
 
-  //Start summit vehicles & equipment -- 
-  console.log('START SUMMIT VEHICLES & EQUIPMENT FORM');
+  // //Click next button
+  // await clickHandler('//*[@id="cdk-accordion-child-7"]/div/div/button[2]')
 
-  //Exterior of vehicle generally clean and free of visual defects -- N/A
-  await clickHandler('//*[@id="mat-radio-86"]/label/span[1]/span[1]')
+  // //Start summit vehicles & equipment -- 
+  // console.log('START SUMMIT VEHICLES & EQUIPMENT FORM');
 
-  //Interior of vehicle kept tidy and clean -- NO 
-  await clickHandler('//*[@id="mat-radio-89"]/label/span[1]/span[1]')
-  await page.type("[formcontrolname=comment]", '**TEST**');
-  await clickHandler('//*[@id="mat-dialog-48"]/app-comment/div[2]/form/div[2]/div')
-  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
-  await page.waitForXPath('//*[@id="ion-overlay-25"]/div[2]/div[1]/div[2]')
-  await clickHandler('//*[@id="ion-overlay-25"]/div[2]/div[1]/div[2]')
-  await page.click('[formcontrolname=CorrectiveActionRequired]')
-  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**') 
-  await clickHandler('//*[@id="mat-dialog-49"]/app-corrective-action/form/div[3]/mat-icon')
-  await page.waitForXPath('//*[@id="mat-dialog-48"]/app-comment/div[2]/div/button[3]')
-  await clickHandler('//*[@id="mat-dialog-48"]/app-comment/div[2]/div/button[3]')
+  // //Exterior of vehicle generally clean and free of visual defects -- N/A
+  // await clickHandler('//*[@id="mat-radio-86"]/label/span[1]/span[1]')
 
-  //Vehicle windshield free of major chips and cracks -- YES
-  await clickHandler('//*[@id="mat-radio-92"]/label/span[1]/span[1]')
+  // //Interior of vehicle kept tidy and clean -- NO 
+  // await clickHandler('//*[@id="mat-radio-89"]/label/span[1]/span[1]')
+  // await page.type("[formcontrolname=comment]", '**TEST**');
+  // await clickHandler('//*[@id="mat-dialog-48"]/app-comment/div[2]/form/div[2]/div')
+  // await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  // await page.waitForXPath('//*[@id="ion-overlay-25"]/div[2]/div[1]/div[2]')
+  // await clickHandler('//*[@id="ion-overlay-25"]/div[2]/div[1]/div[2]')
+  // await page.click('[formcontrolname=CorrectiveActionRequired]')
+  // await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**') 
+  // await clickHandler('//*[@id="mat-dialog-49"]/app-corrective-action/form/div[3]/mat-icon')
+  // await page.waitForXPath('//*[@id="mat-dialog-48"]/app-comment/div[2]/div/button[3]')
+  // await clickHandler('//*[@id="mat-dialog-48"]/app-comment/div[2]/div/button[3]')
 
-  //Daily pre-use inspection completed 
-  await clickHandler('//*[@id="mat-radio-97"]/label/span[1]/span[1]')
-  await page.type("[formcontrolname=comment]", '**TEST**');
-  await clickHandler('//*[@id="mat-dialog-50"]/app-comment/div[2]/form/div[2]/div')
-  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
-  await page.waitForXPath('//*[@id="ion-overlay-26"]/div[2]/div[1]/div[2]')
-  await clickHandler('//*[@id="ion-overlay-26"]/div[2]/div[1]/div[2]')
-  await page.click('[formcontrolname=CorrectiveActionRequired]')
-  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
-  await clickHandler('//*[@id="mat-dialog-51"]/app-corrective-action/form/div[3]/mat-icon')
-  await page.waitForXPath('//*[@id="mat-dialog-50"]/app-comment/div[2]/div/button[3]')
-  await clickHandler('//*[@id="mat-dialog-50"]/app-comment/div[2]/div/button[3]')
+  // //Vehicle windshield free of major chips and cracks -- YES
+  // await clickHandler('//*[@id="mat-radio-92"]/label/span[1]/span[1]')
 
-  //Equipment pre-use inspection completed -- N/A
-  await clickHandler('//*[@id="mat-radio-102"]/label/span[1]/span[1]')
+  // //Daily pre-use inspection completed 
+  // await clickHandler('//*[@id="mat-radio-97"]/label/span[1]/span[1]')
+  // await page.type("[formcontrolname=comment]", '**TEST**');
+  // await clickHandler('//*[@id="mat-dialog-50"]/app-comment/div[2]/form/div[2]/div')
+  // await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  // await page.waitForXPath('//*[@id="ion-overlay-26"]/div[2]/div[1]/div[2]')
+  // await clickHandler('//*[@id="ion-overlay-26"]/div[2]/div[1]/div[2]')
+  // await page.click('[formcontrolname=CorrectiveActionRequired]')
+  // await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  // await clickHandler('//*[@id="mat-dialog-51"]/app-corrective-action/form/div[3]/mat-icon')
+  // await page.waitForXPath('//*[@id="mat-dialog-50"]/app-comment/div[2]/div/button[3]')
+  // await clickHandler('//*[@id="mat-dialog-50"]/app-comment/div[2]/div/button[3]')
 
-  //Cargo (internal and external) properly stowed and secured -- NO 
-  await clickHandler('//*[@id="mat-radio-105"]/label/span[1]/span[1]')
-  await page.type("[formcontrolname=comment]", '**TEST**');
-  await clickHandler('//*[@id="mat-dialog-52"]/app-comment/div[2]/form/div[2]/div')
-  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
-  await page.waitForXPath('//*[@id="ion-overlay-27"]/div[2]/div[1]/div[2]')
-  await clickHandler('//*[@id="ion-overlay-27"]/div[2]/div[1]/div[2]')
-  await page.click('[formcontrolname=CorrectiveActionRequired]')
-  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
-  await clickHandler('//*[@id="mat-dialog-53"]/app-corrective-action/form/div[3]/mat-icon')
-  await page.waitForXPath('//*[@id="mat-dialog-52"]/app-comment/div[2]/div/button[3]')
-  await clickHandler('//*[@id="mat-dialog-52"]/app-comment/div[2]/div/button[3]')
+  // //Equipment pre-use inspection completed -- N/A
+  // await clickHandler('//*[@id="mat-radio-102"]/label/span[1]/span[1]')
+
+  // //Cargo (internal and external) properly stowed and secured -- NO 
+  // await clickHandler('//*[@id="mat-radio-105"]/label/span[1]/span[1]')
+  // await page.type("[formcontrolname=comment]", '**TEST**');
+  // await clickHandler('//*[@id="mat-dialog-52"]/app-comment/div[2]/form/div[2]/div')
+  // await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  // await page.waitForXPath('//*[@id="ion-overlay-27"]/div[2]/div[1]/div[2]')
+  // await clickHandler('//*[@id="ion-overlay-27"]/div[2]/div[1]/div[2]')
+  // await page.click('[formcontrolname=CorrectiveActionRequired]')
+  // await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  // await clickHandler('//*[@id="mat-dialog-53"]/app-corrective-action/form/div[3]/mat-icon')
+  // await page.waitForXPath('//*[@id="mat-dialog-52"]/app-comment/div[2]/div/button[3]')
+  // await clickHandler('//*[@id="mat-dialog-52"]/app-comment/div[2]/div/button[3]')
   
-  //Horn is proper working condition 
-  await clickHandler('//*[@id="mat-radio-108"]/label/span[1]/span[1]')
+  // //Horn is proper working condition 
+  // await clickHandler('//*[@id="mat-radio-108"]/label/span[1]/span[1]')
 
-  //Headlights are in proper working condition -- NO 
-  await clickHandler('//*[@id="mat-radio-113"]/label/span[1]/span[1]')
-  await page.type("[formcontrolname=comment]", '**TEST**');
-  await clickHandler('//*[@id="mat-dialog-54"]/app-comment/div[2]/form/div[2]/div')
-  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
-  await page.waitForXPath('//*[@id="ion-overlay-28"]/div[2]/div[1]/div[2]')
-  await clickHandler('//*[@id="ion-overlay-28"]/div[2]/div[1]/div[2]')
-  await page.click('[formcontrolname=CorrectiveActionRequired]')
-  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
-  await clickHandler('//*[@id="mat-dialog-55"]/app-corrective-action/form/div[3]/mat-icon')
-  await page.waitForXPath('//*[@id="mat-dialog-54"]/app-comment/div[2]/div/button[3]')
-  await clickHandler('//*[@id="mat-dialog-54"]/app-comment/div[2]/div/button[3]')
+  // //Headlights are in proper working condition -- NO 
+  // await clickHandler('//*[@id="mat-radio-113"]/label/span[1]/span[1]')
+  // await page.type("[formcontrolname=comment]", '**TEST**');
+  // await clickHandler('//*[@id="mat-dialog-54"]/app-comment/div[2]/form/div[2]/div')
+  // await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  // await page.waitForXPath('//*[@id="ion-overlay-28"]/div[2]/div[1]/div[2]')
+  // await clickHandler('//*[@id="ion-overlay-28"]/div[2]/div[1]/div[2]')
+  // await page.click('[formcontrolname=CorrectiveActionRequired]')
+  // await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  // await clickHandler('//*[@id="mat-dialog-55"]/app-corrective-action/form/div[3]/mat-icon')
+  // await page.waitForXPath('//*[@id="mat-dialog-54"]/app-comment/div[2]/div/button[3]')
+  // await clickHandler('//*[@id="mat-dialog-54"]/app-comment/div[2]/div/button[3]')
 
-  //Signal lights are in proper working condition -- N/A
-  await clickHandler('//*[@id="mat-radio-118"]/label/span[1]/span[1]')
+  // //Signal lights are in proper working condition -- N/A
+  // await clickHandler('//*[@id="mat-radio-118"]/label/span[1]/span[1]')
 
-  //Emergency warning / strobe light equipped on vehicle -- NO 
-  await clickHandler('//*[@id="mat-radio-121"]/label/span[1]/span[1]')
-  await page.type("[formcontrolname=comment]", '**TEST**');
-  await clickHandler('//*[@id="mat-dialog-56"]/app-comment/div[2]/form/div[2]/div')
-  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
-  await page.waitForXPath('//*[@id="ion-overlay-29"]/div[2]/div[1]/div[2]')
-  await clickHandler('//*[@id="ion-overlay-29"]/div[2]/div[1]/div[2]')
-  await page.click('[formcontrolname=CorrectiveActionRequired]')
-  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
-  await clickHandler('//*[@id="mat-dialog-57"]/app-corrective-action/form/div[3]/mat-icon')
-  await page.waitForXPath('//*[@id="mat-dialog-56"]/app-comment/div[2]/div/button[3]')
-  await clickHandler('//*[@id="mat-dialog-56"]/app-comment/div[2]/div/button[3]')
+  // //Emergency warning / strobe light equipped on vehicle -- NO 
+  // await clickHandler('//*[@id="mat-radio-121"]/label/span[1]/span[1]')
+  // await page.type("[formcontrolname=comment]", '**TEST**');
+  // await clickHandler('//*[@id="mat-dialog-56"]/app-comment/div[2]/form/div[2]/div')
+  // await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  // await page.waitForXPath('//*[@id="ion-overlay-29"]/div[2]/div[1]/div[2]')
+  // await clickHandler('//*[@id="ion-overlay-29"]/div[2]/div[1]/div[2]')
+  // await page.click('[formcontrolname=CorrectiveActionRequired]')
+  // await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  // await clickHandler('//*[@id="mat-dialog-57"]/app-corrective-action/form/div[3]/mat-icon')
+  // await page.waitForXPath('//*[@id="mat-dialog-56"]/app-comment/div[2]/div/button[3]')
+  // await clickHandler('//*[@id="mat-dialog-56"]/app-comment/div[2]/div/button[3]')
 
-  //Safety / buggy whip equipped on vehicle -- YES
-  await clickHandler('//*[@id="mat-radio-124"]/label/span[1]/span[1]')
+  // //Safety / buggy whip equipped on vehicle -- YES
+  // await clickHandler('//*[@id="mat-radio-124"]/label/span[1]/span[1]')
 
-  //First aid kit equipped in vehicle -- NO 
-  await clickHandler('//*[@id="mat-radio-129"]/label/span[1]/span[1]')
-  await page.type("[formcontrolname=comment]", '**TEST**');
-  await clickHandler('//*[@id="mat-dialog-58"]/app-comment/div[2]/form/div[2]/div')
-  await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
-  await page.waitForXPath('//*[@id="ion-overlay-30"]/div[2]/div[1]/div[2]')
-  await clickHandler('//*[@id="ion-overlay-30"]/div[2]/div[1]/div[2]')
-  await page.click('[formcontrolname=CorrectiveActionRequired]')
-  await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
-  await clickHandler('//*[@id="mat-dialog-59"]/app-corrective-action/form/div[3]/mat-icon')
-  await page.waitForXPath('//*[@id="mat-dialog-58"]/app-comment/div[2]/div/button[3]')
-  await clickHandler('//*[@id="mat-dialog-58"]/app-comment/div[2]/div/button[3]')
+  // //First aid kit equipped in vehicle -- NO 
+  // await clickHandler('//*[@id="mat-radio-129"]/label/span[1]/span[1]')
+  // await page.type("[formcontrolname=comment]", '**TEST**');
+  // await clickHandler('//*[@id="mat-dialog-58"]/app-comment/div[2]/form/div[2]/div')
+  // await page.click('[formcontrolname=DateCorrectiveActionToBeCompleted]')
+  // await page.waitForXPath('//*[@id="ion-overlay-30"]/div[2]/div[1]/div[2]')
+  // await clickHandler('//*[@id="ion-overlay-30"]/div[2]/div[1]/div[2]')
+  // await page.click('[formcontrolname=CorrectiveActionRequired]')
+  // await page.type('[formcontrolname=CorrectiveActionRequired]', '**TEST**')
+  // await clickHandler('//*[@id="mat-dialog-59"]/app-corrective-action/form/div[3]/mat-icon')
+  // await page.waitForXPath('//*[@id="mat-dialog-58"]/app-comment/div[2]/div/button[3]')
+  // await clickHandler('//*[@id="mat-dialog-58"]/app-comment/div[2]/div/button[3]')
 
-  //Emergency survival kit equipped in vehicle -- YES
-  await clickHandler('//*[@id="mat-radio-132"]/label/span[1]/span[1]')
+  // //Emergency survival kit equipped in vehicle -- YES
+  // await clickHandler('//*[@id="mat-radio-132"]/label/span[1]/span[1]')
 
-  //Click next button 
-  await clickHandler('//*[@id="cdk-accordion-child-8"]/div/div/button[2]')
+  // //Click next button 
+  // await clickHandler('//*[@id="cdk-accordion-child-8"]/div/div/button[2]')
+
+  // //Test key positive findings 
+  // console.log('FILL IN COMMENTS SECTION FOR KEY POSITIVE FINDINGS');
+
+  // await page.click('[formcontrolname=KeyPositiveFindings]')
+  // await page.type('[formcontrolname=KeyPositiveFindings]', '**TEST**')
+
+  // //Click next button 
+  // await clickHandler('//*[@id="cdk-accordion-child-9"]/div/div/button[2]')
+
+  // //Check discrepancies and click next button
+  // await clickHandler('//*[@id="cdk-accordion-child-10"]/div/div/button[2]')
+
+
+
+
+
+
+
+
+
 
 
 
