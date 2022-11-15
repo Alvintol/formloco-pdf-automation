@@ -109,7 +109,8 @@ require("dotenv").config();
 
   const correctiveActionDate = async () => {
     await page.click(formControlDate);
-    await clickHandler(dateButtonPath);
+    await page.waitForXPath(dateButtonPath);
+    await clickHandler(dateButtonPath)
   };
 
   // Save Hazard Corrective Action Date
@@ -145,9 +146,7 @@ require("dotenv").config();
   console.log("ENTERING RULES & WORK PROCEDURES DATA...");
 
   // Satisfactory Rules & Work Procedures Radio
-  await clickHandler(
-    "/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[3]/div/div/app-rules-work-procedures/div/form/div[3]/mat-radio-group/mat-radio-button[1]"
-  );
+  await clickHandler('//*[@id="mat-radio-10"]/label/span[1]/span[1]');
 
   // Unsatisfactory Rules & Work Procedures Radio
   await clickHandler(
