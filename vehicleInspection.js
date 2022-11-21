@@ -4,7 +4,7 @@ require("dotenv").config();
   const { URL, EMAIL, PASSWORD } = process.env;
 
   const formController = {
-    details: false,
+    details: true,
   };
 
   const browser = await puppeteer.launch({ headless: false });

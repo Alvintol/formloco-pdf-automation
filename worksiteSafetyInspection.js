@@ -4,15 +4,15 @@ require("dotenv").config();
   const { URL, EMAIL, PASSWORD } = process.env;
 
   const formController = {
-    hazardIdentification: true,
-    jobSiteManagement: true,
-    fireExtinguishers: true,
-    emergencyResponsePlanning: true,
-    groundDisturbance: true,
-    confinedSpaceEntry: true,
-    hotWork: true,
-    summitVehicles: true,
-    keyPositiveFindings: true,
+    hazardIdentification: false,
+    jobSiteManagement: false,
+    fireExtinguishers: false,
+    emergencyResponsePlanning: false,
+    groundDisturbance: false,
+    confinedSpaceEntry: false,
+    hotWork: false,
+    summitVehicles: false,
+    keyPositiveFindings: false,
   };
 
   const browser = await puppeteer.launch({ headless: false });
