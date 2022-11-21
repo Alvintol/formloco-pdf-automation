@@ -4,8 +4,7 @@ require("dotenv").config();
   const { URL, EMAIL, PASSWORD } = process.env;
 
   const formController = {
-    thingsToDoCheck: false,
-    observationsImprovementAndFeedback: false,
+    thingsToDoCheck: true,
 
   }
 
