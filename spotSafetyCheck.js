@@ -4,15 +4,13 @@ require("dotenv").config();
   const { URL, EMAIL, PASSWORD } = process.env;
 
   const formController = {
-    
     hazardIdentification: false,
     rulesWorksProcedure: false,
-    incidentReporting: false, 
-    communicationAndTraining: false, 
-    personalProtectiveEquipment: false, 
+    incidentReporting: false,
+    communicationAndTraining: false,
+    personalProtectiveEquipment: false,
     safetyEquipment: false,
-
-  }
+  };
 
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
@@ -65,7 +63,7 @@ require("dotenv").config();
   const correctiveActionDate = async () => {
     await page.click(formControlDate);
     await page.waitForXPath(dateButtonPath);
-    await clickHandler(dateButtonPath)
+    await clickHandler(dateButtonPath);
   };
 
   // WORKSITE SAFETY MANAGEMENT REVIEW
@@ -102,65 +100,60 @@ require("dotenv").config();
   console.log("ENTERING HAZARD IDENTIFICATION & CONTROL DATA...");
 
   if (formController.hazardIdentification) {
-
     // Satisfactory Hazard Identification & Control radio
-  await clickHandler('//*[@id="mat-radio-2"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-2"]/label/span[1]');
 
-  await page.type(formControlComment, "***SATISFACTORY COMMENT HAZARD***");
+    await page.type(formControlComment, "***SATISFACTORY COMMENT HAZARD***");
 
-  // Save Satisfactory Hazard Comment
-  await clickHandler(
-    '//*[@id="mat-dialog-0"]/app-comment/div[2]/div/button[3]'
-  );
-  console.log("HAZARD COMMENT COMPLETE");
+    // Save Satisfactory Hazard Comment
+    await clickHandler(
+      '//*[@id="mat-dialog-0"]/app-comment/div[2]/div/button[3]'
+    );
+    console.log("HAZARD COMMENT COMPLETE");
 
-  // Unsatisfactory Hazard Identification & Control radio
-  await clickHandler('//*[@id="mat-radio-7"]/label/span[1]');
-  await page.type(
-    formControlComment,
-    "***UNSATISFACTORY DISCREPANCY HAZARD***"
-  );
+    // Unsatisfactory Hazard Identification & Control radio
+    await clickHandler('//*[@id="mat-radio-7"]/label/span[1]');
+    await page.type(
+      formControlComment,
+      "***UNSATISFACTORY DISCREPANCY HAZARD***"
+    );
 
-  // Hazard Corrective Action Button
-  await clickHandler(
-    '//*[@id="mat-dialog-1"]/app-comment/div[2]/form/div[2]/div/button'
-  );
+    // Hazard Corrective Action Button
+    await clickHandler(
+      '//*[@id="mat-dialog-1"]/app-comment/div[2]/form/div[2]/div/button'
+    );
 
-  // Save Hazard Corrective Action Date
-  await correctiveActionDate();
+    // Save Hazard Corrective Action Date
+    await correctiveActionDate();
 
-  await page.type(formControlCorAct, "***HAZARD CORRECTIVE ACTION TEST***");
+    await page.type(formControlCorAct, "***HAZARD CORRECTIVE ACTION TEST***");
 
-  // Save Hazard Corrective Action
-  await clickHandler(
-    '//*[@id="mat-dialog-2"]/app-corrective-action/form/div[3]/mat-icon'
-  );
+    // Save Hazard Corrective Action
+    await clickHandler(
+      '//*[@id="mat-dialog-2"]/app-corrective-action/form/div[3]/mat-icon'
+    );
 
-  // Save Hazard Discrepancy
-  await clickHandler(
-    '//*[@id="mat-dialog-1"]/app-comment/div[2]/div/button[3]'
-  );
-  console.log("HAZARD DISCREPANCY COMPLETE");
+    // Save Hazard Discrepancy
+    await clickHandler(
+      '//*[@id="mat-dialog-1"]/app-comment/div[2]/div/button[3]'
+    );
+    console.log("HAZARD DISCREPANCY COMPLETE");
 
-  await page.type(
-    "[formcontrolname=HazardComments]",
-    "***HAZARD ADDITIONAL COMMENTS***"
-  );
+    await page.type(
+      "[formcontrolname=HazardComments]",
+      "***HAZARD ADDITIONAL COMMENTS***"
+    );
 
-  // Hazard Identification & Control Next Button
-  await clickHandler(
-    "/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[2]/div/div/div/button[2]"
-  );
+    // Hazard Identification & Control Next Button
+    await clickHandler(
+      "/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[2]/div/div/div/button[2]"
+    );
 
-  console.log("HAZARD IDENTIFICATION & CONTROL COMPLETE");
-
+    console.log("HAZARD IDENTIFICATION & CONTROL COMPLETE");
   } else {
 
-    // await clickHandler('//*[@id="mat-radio-4"]/label/span[1]/span[1]')
-    // await clickHandler('//*[@id="mat-radio-8"]/label/span[1]/span[1]')
 
-    await clickHandler('//*[@id="cdk-accordion-child-1"]/div/div/button[2]')
-    
+    await clickHandler('//*[@id="cdk-accordion-child-1"]/div/div/button[2]');
   }
 
   // RULES & WORK PROCEDURES
@@ -168,125 +161,111 @@ require("dotenv").config();
   console.log("ENTERING RULES & WORK PROCEDURES DATA...");
 
   if (formController.rulesWorksProcedure) {
-
     // Satisfactory Rules & Work Procedures Radio
-  await clickHandler('//*[@id="mat-radio-10"]/label/span[1]/span[1]');
+    await clickHandler('//*[@id="mat-radio-10"]/label/span[1]/span[1]');
 
-  // Unsatisfactory Rules & Work Procedures Radio
-  await clickHandler(
-    "/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[3]/div/div/app-rules-work-procedures/div/form/div[5]/mat-radio-group/mat-radio-button[2]"
-  );
+    // Unsatisfactory Rules & Work Procedures Radio
+    await clickHandler(
+      '//*[@id="mat-radio-15"]/label/span[1]/span[1]'
+    );
 
-  // await page.waitForSelector(formControlComment)
-  await page.type(formControlComment, "****RULES DISCREPANCY****");
+    // await page.waitForSelector(formControlComment)
+    await page.type(formControlComment, "****RULES DISCREPANCY****");
 
-  // Rules Corrective Action Button
-  await clickHandler(
-    '//*[@id="mat-dialog-0"]/app-comment/div[2]/form/div[2]/div'
-  );
+    // Rules Corrective Action Button
+    await clickHandler(
+      '//*[@id="mat-dialog-3"]/app-comment/div[2]/form/div[2]/div'
+    );
 
-  //Save Rules Corrective Action Date
-  await correctiveActionDate();
+    // //Save Rules Corrective Action Date
+    await correctiveActionDate();
 
-  await page.type(formControlCorAct, "***RULES CORRECTIVE ACTION TEST***");
+    await page.type(formControlCorAct, "***RULES CORRECTIVE ACTION TEST***");
 
-  // Save Rules Corrective Action
-  await clickHandler(
-    '//*[@id="mat-dialog-1"]/app-corrective-action/form/div[3]/mat-icon'
-  );
+    // Save Rules Corrective Action
+    await clickHandler(
+      '//*[@id="mat-dialog-4"]/app-corrective-action/form/div[3]/mat-icon'
+    );
 
-  // Save Rules Discrepancy
-  await clickHandler(
-    '//*[@id="mat-dialog-0"]/app-comment/div[2]/div/button[3]'
-  );
+    // Save Rules Discrepancy
+    await clickHandler(
+      '//*[@id="mat-dialog-3"]/app-comment/div[2]/div/button[3]'
+    );
 
-  console.log("RULES DISCREPANCY COMPLETE");
+    console.log("RULES DISCREPANCY COMPLETE");
 
-  await page.type(
-    "[formcontrolname=RulesComments]",
-    "***RULES ADDITIONAL COMMENTS***"
-  );
+    await page.type(
+      "[formcontrolname=RulesComments]",
+      "***RULES ADDITIONAL COMMENTS***"
+    );
 
-  // Rules & Work Procedures Next Button
-  await clickHandler('//*[@id="cdk-accordion-child-2"]/div/div/button[2]');
+    // Rules & Work Procedures Next Button
+    await clickHandler('//*[@id="cdk-accordion-child-2"]/div/div/button[2]');
 
-  console.log("RULES & WORK PROCEDURES COMPLETE");
-
+    console.log("RULES & WORK PROCEDURES COMPLETE");
   } else {
-
-    // await clickHandler('//*[@id="mat-radio-12"]/label/span[1]/span[1]')
-    // await clickHandler('//*[@id="mat-radio-16"]/label/span[1]/span[1]')
-
-    await clickHandler('//*[@id="cdk-accordion-child-2"]/div/div/button[2]')
-
+    await clickHandler('//*[@id="cdk-accordion-child-2"]/div/div/button[2]');
   }
 
   // INCIDENT REPORTING
   console.log("ENTERING INCIDENT REPORTING DATA...");
 
   if (formController.incidentReporting) {
-
     // Satisfactory Incident Reporting Radio Button 1
-  await clickHandler(
-    "/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[4]/div/div/app-incident-reporting/div/form/div[3]/mat-radio-group/mat-radio-button[1]"
-  );
+    await clickHandler(
+      '//*[@id="mat-radio-18"]/label/span[1]/span[1]'
+    );
 
-  // Satisfactory Incident Reporting Radio Button 2
-  await clickHandler(
-    "/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[4]/div/div/app-incident-reporting/div/form/div[5]/mat-radio-group/mat-radio-button[1]"
-  );
+    // Satisfactory Incident Reporting Radio Button 2
+    await clickHandler(
+      '//*[@id="mat-radio-21"]/label/span[1]/span[1]'
+    );
 
-  // Satisfactory Incident Reporting Radio Button 3
-  await clickHandler(
-    "/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[4]/div/div/app-incident-reporting/div/form/div[7]/mat-radio-group/mat-radio-button[1]"
-  );
+    // Satisfactory Incident Reporting Radio Button 3
+    await clickHandler(
+      '//*[@id="mat-radio-24"]/label/span[1]/span[1]'
+    );
 
-  // Unsatisfactory Incident Reporting Radio Button
-  await clickHandler(
-    "/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[4]/div/div/app-incident-reporting/div/form/div[9]/mat-radio-group/mat-radio-button[2]"
-  );
+    // Unsatisfactory Incident Reporting Radio Button
+    await clickHandler(
+      '//*[@id="mat-radio-29"]/label/span[1]/span[1]'
+    );
 
-  await page.type(formControlComment, "***INCIDENT REPORTING DISCREPANCY***");
+    await page.type(formControlComment, "***INCIDENT REPORTING DISCREPANCY***");
 
-  // Incident Reporting Correction Action Button
-  await clickHandler(
-    '//*[@id="mat-dialog-0"]/app-comment/div[2]/form/div[2]/div'
-  );
+    // Incident Reporting Correction Action Button
+    await clickHandler(
+      '//*[@id="mat-dialog-5"]/app-comment/div[2]/form/div[2]/div'
+    );
 
-  // Save Incident Reporting Date
-  await correctiveActionDate();
+    // Save Incident Reporting Date
+    await correctiveActionDate();
 
-  await page.type(
-    "[formcontrolname=CorrectiveActionRequired]",
-    "***INCIDENT REPORTING CORRECTIVE ACTION***"
-  );
+    await page.type(
+      "[formcontrolname=CorrectiveActionRequired]",
+      "***INCIDENT REPORTING CORRECTIVE ACTION***"
+    );
 
-  // Save Incident Corrective Action
-  await clickHandler(
-    '//*[@id="mat-dialog-1"]/app-corrective-action/form/div[3]/mat-icon'
-  );
+    // Save Incident Corrective Action
+    await clickHandler(
+      '//*[@id="mat-dialog-6"]/app-corrective-action/form/div[3]/mat-icon'
+    );
 
-  // Save Incident Discrepancy
-  await clickHandler(
-    '//*[@id="mat-dialog-0"]/app-comment/div[2]/div/button[3]'
-  );
+    // Save Incident Discrepancy
+    await clickHandler(
+      '//*[@id="mat-dialog-5"]/app-comment/div[2]/div/button[3]'
+    );
 
-  await page.type(
-    "[formcontrolname=IncidentComments]",
-    "***INCIDENT REPORTING ADDITIONAL COMMENTS***"
-  );
+    await page.type(
+      "[formcontrolname=IncidentComments]",
+      "***INCIDENT REPORTING ADDITIONAL COMMENTS***"
+    );
 
-  // Incident Reporting Next Button
-  await clickHandler('//*[@id="cdk-accordion-child-3"]/div/div/button[2]');
-  console.log("INCIDENT REPORTING COMPLETE");
+    // Incident Reporting Next Button
+    await clickHandler('//*[@id="cdk-accordion-child-3"]/div/div/button[2]');
+    console.log("INCIDENT REPORTING COMPLETE");
   } else {
-
-    // await clickHandler('//*[@id="mat-radio-18"]/label/span[1]/span[1]')
-    // await clickHandler('//*[@id="mat-radio-21"]/label/span[1]/span[1]')
-    // await clickHandler('//*[@id="mat-radio-24"]/label/span[1]/span[1]')
-    // await clickHandler('//*[@id="mat-radio-28"]/label/span[1]/span[1]')
-
-    await clickHandler('//*[@id="cdk-accordion-child-3"]/div/div/button[2]')
+    await clickHandler('//*[@id="cdk-accordion-child-3"]/div/div/button[2]');
   }
 
   // COMMUNICATION & TRAINING
@@ -294,219 +273,200 @@ require("dotenv").config();
   console.log("ENTERING COMMUNICATION & TRAINING DATA...");
 
   if (formController.communicationAndTraining) {
-
     // Satisfactory Communication Radio Button 1
-  await clickHandler('//*[@id="mat-radio-32"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-32"]/label/span[1]');
 
-  await page.type(
-    formControlComment,
-    "***SATISFACTORY COMMUNICATION COMMENT TEST***"
-  );
+    await page.type(
+      formControlComment,
+      "***SATISFACTORY COMMUNICATION COMMENT TEST***"
+    );
 
-  // Save Communication Comment
-  await clickHandler('//*[@id="mat-dialog-0"]/app-comment/div[2]/form/div[2]/div');
+    // Save Communication Comment
+    await clickHandler(
+      '//*[@id="mat-dialog-0"]/app-comment/div[2]/form/div[2]/div'
+    );
 
-  // Satisfactory Communication Radio Buttons 2-9
-  await clickHandler('//*[@id="mat-radio-36"]/label/span[1]');
-  await clickHandler('//*[@id="mat-radio-39"]/label/span[1]');
-  await clickHandler('//*[@id="mat-radio-104"]/label/span[1]');
-  await clickHandler('//*[@id="mat-radio-107"]/label/span[1]');
-  await clickHandler('//*[@id="mat-radio-110"]/label/span[1]');
-  await clickHandler('//*[@id="mat-radio-113"]/label/span[1]');
-  await clickHandler('//*[@id="mat-radio-116"]/label/span[1]');
+    // Satisfactory Communication Radio Buttons 2-9
+    await clickHandler('//*[@id="mat-radio-36"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-39"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-104"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-107"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-110"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-113"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-116"]/label/span[1]');
 
-  // Unsatisfactory Communication Radio Button 10
-  await clickHandler('//*[@id="mat-radio-121"]/label/span[1]');
-  await page.type(
-    formControlComment,
-    "***COMMUNICATION & TRAINING DISCREPANCY***"
-  );
+    // Unsatisfactory Communication Radio Button 10
+    await clickHandler('//*[@id="mat-radio-121"]/label/span[1]');
+    await page.type(
+      formControlComment,
+      "***COMMUNICATION & TRAINING DISCREPANCY***"
+    );
 
-  // Communication  Corrective Action Button
-  await clickHandler(
-    '//*[@id="mat-dialog-2"]/app-comment/div[2]/form/div[2]/div'
-  );
+    // Communication  Corrective Action Button
+    await clickHandler(
+      '//*[@id="mat-dialog-2"]/app-comment/div[2]/form/div[2]/div'
+    );
 
-  // Saves Communications Corrective Action Date
-  await correctiveActionDate();
+    // Saves Communications Corrective Action Date
+    await correctiveActionDate();
 
-  await page.type(
-    formControlCorAct,
-    "***COMMUNICATIONS & TRAINING CORRECTIVE ACTION***"
-  );
+    await page.type(
+      formControlCorAct,
+      "***COMMUNICATIONS & TRAINING CORRECTIVE ACTION***"
+    );
 
-  // Saves Communications Corrective Action
-  await clickHandler(
-    '//*[@id="mat-dialog-3"]/app-corrective-action/form/div[3]/mat-icon'
-  );
+    // Saves Communications Corrective Action
+    await clickHandler(
+      '//*[@id="mat-dialog-3"]/app-corrective-action/form/div[3]/mat-icon'
+    );
 
-  // Saves Communication Discrepancy
-  await clickHandler(
-    '//*[@id="mat-dialog-2"]/app-comment/div[2]/div/button[3]'
-  );
+    // Saves Communication Discrepancy
+    await clickHandler(
+      '//*[@id="mat-dialog-2"]/app-comment/div[2]/div/button[3]'
+    );
 
-  // Satisfactory Communication Radio Button 11
-  await clickHandler('//*[@id="mat-radio-124"]/label/span[1]');
+    // Satisfactory Communication Radio Button 11
+    await clickHandler('//*[@id="mat-radio-124"]/label/span[1]');
 
-  await page.type(
-    "[formcontrolname=CommunicationComments]",
-    "***COMMUNICATIONS & TRAINING ADDITIONAL COMMENTS***"
-  );
+    await page.type(
+      "[formcontrolname=CommunicationComments]",
+      "***COMMUNICATIONS & TRAINING ADDITIONAL COMMENTS***"
+    );
 
-  // Communications & Training Next Button
-  await clickHandler('//*[@id="cdk-accordion-child-4"]/div/div/button[2]');
-  console.log("COMMUNICATIONS & TRAINING COMPLETE");
-
-    
+    // Communications & Training Next Button
+    await clickHandler('//*[@id="cdk-accordion-child-4"]/div/div/button[2]');
+    console.log("COMMUNICATIONS & TRAINING COMPLETE");
   } else {
 
-    // await clickHandler('//*[@id="mat-radio-32"]/label/span[1]/span[1]')
-    // await clickHandler('//*[@id="mat-radio-36"]/label/span[1]/span[1]')
-    // await clickHandler('//*[@id="mat-radio-39"]/label/span[1]/span[1]')
-    // await clickHandler('//*[@id="mat-radio-104"]/label/span[1]/span[1]')
-    // await clickHandler('//*[@id="mat-radio-107"]/label/span[1]/span[1]')
-    // await clickHandler('//*[@id="mat-radio-110"]/label/span[1]/span[1]')
-    // await clickHandler('//*[@id="mat-radio-113"]/label/span[1]/span[1]')
-    // await clickHandler('//*[@id="mat-radio-116"]/label/span[1]/span[1]')
-    // await clickHandler('//*[@id="mat-radio-120"]/label/span[1]/span[1]')
-    // await clickHandler('//*[@id="mat-radio-124"]/label/span[1]/span[1]')
-
-    await clickHandler('//*[@id="cdk-accordion-child-4"]/div/div/button[2]')
-
-    
+    await clickHandler('//*[@id="cdk-accordion-child-4"]/div/div/button[2]');
   }
-
-  
- 
 
   // PERSONAL PROTECTIVE EQUIPMENT
 
   console.log("ENTERING PERSONAL PROTECTIVE EQUIPMENT DATA...");
 
   if (formController.personalProtectiveEquipment) {
-
     // Satisfactory PPE Radio Buttons 1-8
-  await clickHandler('//*[@id="mat-radio-42"]/label/span[1]');
-  await clickHandler('//*[@id="mat-radio-45"]/label/span[1]');
-  await clickHandler('//*[@id="mat-radio-48"]/label/span[1]');
-  await clickHandler('//*[@id="mat-radio-51"]/label/span[1]');
-  await clickHandler('//*[@id="mat-radio-54"]/label/span[1]');
-  await clickHandler('//*[@id="mat-radio-57"]/label/span[1]');
-  await clickHandler('//*[@id="mat-radio-61"]/label/span[1]');
-  await clickHandler('//*[@id="mat-radio-65"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-42"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-45"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-48"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-51"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-54"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-57"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-61"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-65"]/label/span[1]');
 
-  // Unsatisfactory PPE Radio Button
-  await clickHandler('//*[@id="mat-radio-70"]/label/span[1]');
+    // Unsatisfactory PPE Radio Button
+    await clickHandler('//*[@id="mat-radio-70"]/label/span[1]');
 
-  await page.type(formControlComment, "***PPE DISCREPANCY TEST***");
+    await page.type(formControlComment, "***PPE DISCREPANCY TEST***");
 
-  // PPE CORRECTIVE ACTION BUTTON
-  await clickHandler('//*[@id="mat-dialog-0"]/app-comment/div[2]/form/div[2]/div');
+    // PPE CORRECTIVE ACTION BUTTON
+    await clickHandler(
+      '//*[@id="mat-dialog-0"]/app-comment/div[2]/form/div[2]/div'
+    );
 
-  // Saves PPE Corrective ACtion Date
-  await correctiveActionDate();
+    // Saves PPE Corrective ACtion Date
+    await correctiveActionDate();
 
-  await page.type(formControlCorAct, "***PPE CORRECTIVE ACTION***");
+    await page.type(formControlCorAct, "***PPE CORRECTIVE ACTION***");
 
-  // Saves PPE Corrective ACtion
-  await clickHandler('//*[@id="mat-dialog-1"]/app-corrective-action/form/div[3]/mat-icon');
+    // Saves PPE Corrective ACtion
+    await clickHandler(
+      '//*[@id="mat-dialog-1"]/app-corrective-action/form/div[3]/mat-icon'
+    );
 
-  // Saves PPE Discrepancy
-  await clickHandler(
-    '//*[@id="mat-dialog-0"]/app-comment/div[2]/div/button[3]'
-  );
-  console.log("PERSONAL PROTECTIVE EQUIPMENT DISCREPANCY COMPLETED");
+    // Saves PPE Discrepancy
+    await clickHandler(
+      '//*[@id="mat-dialog-0"]/app-comment/div[2]/div/button[3]'
+    );
+    console.log("PERSONAL PROTECTIVE EQUIPMENT DISCREPANCY COMPLETED");
 
-  // N/A PPE Radio Button
-  await clickHandler('//*[@id="mat-radio-75"]/label/span[1]');
+    // N/A PPE Radio Button
+    await clickHandler('//*[@id="mat-radio-75"]/label/span[1]');
 
-  await page.type(
-    "[formcontrolname=PersonalEquipmentComments]",
-    "***PPE ADDITIONAL COMMENTS TEST***"
-  );
+    await page.type(
+      "[formcontrolname=PersonalEquipmentComments]",
+      "***PPE ADDITIONAL COMMENTS TEST***"
+    );
 
-  // PPE Next Button
-  await clickHandler('//*[@id="cdk-accordion-child-5"]/div/div/button[2]');
-  console.log("PERSONAL PROTECTIVE EQUIPMENT COMPLETE");
-
-
+    // PPE Next Button
+    await clickHandler('//*[@id="cdk-accordion-child-5"]/div/div/button[2]');
+    console.log("PERSONAL PROTECTIVE EQUIPMENT COMPLETE");
   } else {
-
-    await clickHandler('//*[@id="cdk-accordion-child-5"]/div/div/button[2]')
-
+    await clickHandler('//*[@id="cdk-accordion-child-5"]/div/div/button[2]');
   }
-   // --------------------- //
 
   // SAFETY EQUIPMENT
 
-  // console.log("ENTERING SAFETY EQUIPMENT DATA...");
+  console.log("ENTERING SAFETY EQUIPMENT DATA...");
 
   if (formController.safetyEquipment) {
-
     // Satisfactory Safety Equipment Radio Buttons 1-5
-  await clickHandler('//*[@id="mat-radio-77"]/label/span[1]');
-  await clickHandler('//*[@id="mat-radio-81"]/label/span[1]');
-  await clickHandler('//*[@id="mat-radio-85"]/label/span[1]');
-  await clickHandler('//*[@id="mat-radio-89"]/label/span[1]');
-  await clickHandler('//*[@id="mat-radio-92"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-77"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-81"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-85"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-89"]/label/span[1]');
+    await clickHandler('//*[@id="mat-radio-92"]/label/span[1]');
 
-  // Unsatisfactory Safety Equipment Radio Button
-  await clickHandler('//*[@id="mat-radio-97"]/label/span[1]');
+    // Unsatisfactory Safety Equipment Radio Button
+    await clickHandler('//*[@id="mat-radio-97"]/label/span[1]');
 
-  await page.type(
-    formControlComment,
-    "***SAFETY EQUIPMENT DISCREPANCY TEST***"
-  );
+    await page.type(
+      formControlComment,
+      "***SAFETY EQUIPMENT DISCREPANCY TEST***"
+    );
 
-  // Safety Equipment Corrective Action Button
-  await clickHandler(
-    '//*[@id="mat-dialog-0"]/app-comment/div[2]/form/div[2]/div'
-  );
+    // Safety Equipment Corrective Action Button
+    await clickHandler(
+      '//*[@id="mat-dialog-0"]/app-comment/div[2]/form/div[2]/div'
+    );
 
-  // Saves Safety Equipment Corrective Action Date
-  await correctiveActionDate();
+    // Saves Safety Equipment Corrective Action Date
+    await correctiveActionDate();
 
-  await page.type(
-    formControlCorAct,
-    "***SAFETY EQUIPMENT CORRECTIVE ACTION***"
-  );
+    await page.type(
+      formControlCorAct,
+      "***SAFETY EQUIPMENT CORRECTIVE ACTION***"
+    );
 
-  // Saves Safety Equipment Corrective Action
-  await clickHandler(
-    '//*[@id="mat-dialog-1"]/app-corrective-action/form/div[3]/mat-icon'
-  );
+    // Saves Safety Equipment Corrective Action
+    await clickHandler(
+      '//*[@id="mat-dialog-1"]/app-corrective-action/form/div[3]/mat-icon'
+    );
 
-  // Saves Safety Equipment Discrepancy
-  await clickHandler(
-    '//*[@id="mat-dialog-0"]/app-comment/div[2]/div/button[3]'
-  );
-  console.log("SAFETY EQUIPMENT DISCREPANCY COMPLETE");
+    // Saves Safety Equipment Discrepancy
+    await clickHandler(
+      '//*[@id="mat-dialog-0"]/app-comment/div[2]/div/button[3]'
+    );
+    console.log("SAFETY EQUIPMENT DISCREPANCY COMPLETE");
 
-  // N/A Safety Equipment Radio Button
-  await clickHandler('//*[@id="mat-radio-102"]/label/span[1]/span[1]');
+    // N/A Safety Equipment Radio Button
+    await clickHandler('//*[@id="mat-radio-102"]/label/span[1]/span[1]');
 
-  await page.type(
-    "[formcontrolname=SafetyEquipmentComments]",
-    "***SAFETY EQUIPMENT ADDITIONAL COMMENTS TEST***"
-  );
+    await page.type(
+      "[formcontrolname=SafetyEquipmentComments]",
+      "***SAFETY EQUIPMENT ADDITIONAL COMMENTS TEST***"
+    );
 
-  //click next button 
-  await clickHandler('//*[@id="cdk-accordion-child-6"]/div/div/button[2]')
+    //click next button
+    await clickHandler('//*[@id="cdk-accordion-child-6"]/div/div/button[2]');
 
-  console.log("SAFETY EQUIPMENT COMPLETE");
-
-
+    console.log("SAFETY EQUIPMENT COMPLETE");
   } else {
-
-    
+    await clickHandler('//*[@id="cdk-accordion-child-6"]/div/div/button[2]');
   }
 
-  
+  //Clicks next on discrepancies
+  await clickHandler('//*[@id="cdk-accordion-child-7"]/div/div/button[2]');
 
-  // Clicks Signature Tab
-  // await clickHandler(
-  //   "/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[10]"
-  // );
+  //click next on comments
+  await clickHandler('//*[@id="cdk-accordion-child-8"]/div/div/button[2]');
+
+  //Clicks Signature Tab
+  await clickHandler(
+    "/html/body/app-root/app-layout/div/div/div/app-form/div[2]/div/app-spot-check-safety/mat-accordion/mat-expansion-panel[10]"
+  );
 
   // Completes forms and generates pdf
   // await clickHandler('//*[@id="cdk-accordion-child-9"]/div/div/mat-icon');
