@@ -3,6 +3,12 @@ require("dotenv").config();
 (async () => {
   const { URL, EMAIL, PASSWORD } = process.env;
 
+  const formController = {
+    thingsToDoCheck: false,
+    observationsImprovementAndFeedback: false,
+
+  }
+
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
   await page.goto(URL);
@@ -49,10 +55,12 @@ require("dotenv").config();
   await page.type(formControlFirstAndLastName, "Form Loco");
   await clickHandler('//*[@id="mat-option-87"]/span');
   await page.type(formControlSupervisorName, "Alvin");
-  await clickHandler('//*[@id="mat-option-137"]/span');
+  await clickHandler('//*[@id="mat-option-138"]');
   await clickHandler('//*[@id="cdk-accordion-child-0"]/div/div/button');
 
-  //Things To Do/Check
+  if (formController.thingsToDoCheck) {
+
+    //Things To Do/Check
   await clickHandler('//*[@id="mat-checkbox-1"]/label/span[1]');
   await clickHandler('//*[@id="mat-checkbox-2"]/label/span[1]');
   await clickHandler('//*[@id="mat-checkbox-3"]/label/span[1]');
@@ -66,9 +74,17 @@ require("dotenv").config();
   await clickHandler('//*[@id="mat-checkbox-11"]/label/span[1]');
   await clickHandler('//*[@id="mat-checkbox-12"]/label/span[1]');
   await clickHandler('//*[@id="mat-checkbox-13"]/label/span[1]');
-  await clickHandler('//*[@id="cdk-accordion-child-1"]/div/div/button');
 
-  //Tour Etiquette Plan for Success
+  //click next button
+  await clickHandler('//*[@id="cdk-accordion-child-1"]/div/div/button');
+  } else {
+
+    //click next button 
+    await clickHandler('//*[@id="cdk-accordion-child-1"]/div/div/button');
+
+  }
+
+  //Tour Etiquette Plan for Success -> clicks next
   await clickHandler('//*[@id="cdk-accordion-child-2"]/div/div/button');
 
   //Observations, Improvement & Feedback
@@ -76,9 +92,11 @@ require("dotenv").config();
   const formControlIO = "[formcontrolname=ImprovementOpportunities]";
   const formControlFS = "[formcontrolname=FeedbackSummary]";
 
+
   await page.type(formControlPO, "**TEST**");
   await page.type(formControlIO, "**TEST**");
   await page.type(formControlFS, "**TEST**");
 
+  //click next button 
   await clickHandler('//*[@id="cdk-accordion-child-3"]/div/div/button[2]');
 })();
