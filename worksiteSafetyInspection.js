@@ -787,57 +787,86 @@ require("dotenv").config();
     //-----------------------------------------------//
 
     // All underground lines with 5 metres of the work area manually exposed -- NO
-    await clickHandler('//*[@id="mat-radio-181"]/label/span[1]/span[1]');
+    await clickHandler('//*[@id="mat-radio-178"]/label/span[1]/span[1]');
+
+    //Input corrective action
     await page.type("[formcontrolname=comment]", "**TEST**");
+
+    //Click corrective action button
     await clickHandler(
-      '//*[@id="mat-dialog-30"]/app-comment/div[2]/form/div[2]/div'
+      '//*[@id="mat-dialog-2"]/app-comment/div[2]/form/div[2]/div/button'
     );
+    
+    //Select date to be completed
     await page.click("[formcontrolname=DateCorrectiveActionToBeCompleted]");
-    await page.waitForXPath('//*[@id="ion-overlay-16"]/div[2]/div[1]/div[2]');
-    await clickHandler('//*[@id="ion-overlay-16"]/div[2]/div[1]/div[2]');
+    await page.waitForXPath('//*[@id="ion-overlay-2"]/div[2]/div[1]/div[2]');
+    await clickHandler('//*[@id="ion-overlay-2"]/div[2]/div[1]/div[2]');
+
+    //Click and input corrective action
     await page.click("[formcontrolname=CorrectiveActionRequired]");
     await page.type("[formcontrolname=CorrectiveActionRequired]", "**TEST**");
+
+    //Save form 
     await clickHandler(
-      '//*[@id="mat-dialog-31"]/app-corrective-action/form/div[3]/mat-icon'
+      '//*[@id="mat-dialog-3"]/app-corrective-action/form/div[3]/mat-icon'
     );
+
+    //Save corrective action
     await page.waitForXPath(
-      '//*[@id="mat-dialog-30"]/app-comment/div[2]/div/button[3]'
+      '//*[@id="mat-dialog-2"]/app-comment/div[2]/div/button[3]'
     );
     await clickHandler(
-      '//*[@id="mat-dialog-30"]/app-comment/div[2]/div/button[3]'
+      '//*[@id="mat-dialog-2"]/app-comment/div[2]/div/button[3]'
     );
     //-----------------------------------------------//
 
-    // //30 metre search area around the work area clearly defined -- YES
-    // await clickHandler('//*[@id="mat-radio-183"]/label/span[1]/span[1]');
+    //30 metre search area around the work area clearly defined -- YES
+    await clickHandler('//*[@id="mat-radio-183"]/label/span[1]/span[1]');
+    //-----------------------------------------------//
 
-    // //Third-party line locates completed within the search area -- NO
-    // await clickHandler('//*[@id="mat-radio-187"]/label/span[1]/span[1]');
-    // await page.type("[formcontrolname=comment]", "**TEST**");
-    // await clickHandler(
-    //   '//*[@id="mat-dialog-32"]/app-comment/div[2]/form/div[2]/div'
-    // );
-    // await page.click("[formcontrolname=DateCorrectiveActionToBeCompleted]");
-    // await page.waitForXPath('//*[@id="ion-overlay-17"]/div[2]/div[1]/div[2]');
-    // await clickHandler('//*[@id="ion-overlay-17"]/div[2]/div[1]/div[2]');
-    // await page.click("[formcontrolname=CorrectiveActionRequired]");
-    // await page.type("[formcontrolname=CorrectiveActionRequired]", "**TEST**");
-    // await clickHandler(
-    //   '//*[@id="mat-dialog-33"]/app-corrective-action/form/div[3]/mat-icon'
-    // );
-    // await page.waitForXPath(
-    //   '//*[@id="mat-dialog-32"]/app-comment/div[2]/div/button[3]'
-    // );
-    // await clickHandler(
-    //   '//*[@id="mat-dialog-32"]/app-comment/div[2]/div/button[3]'
-    // );
+    //Third-party line locates completed within the search area -- NO
+    await clickHandler('//*[@id="mat-radio-184"]/label/span[1]/span[1]');
 
-    // //All required crossing or proximity agreements in place -- YES
-    // await clickHandler('//*[@id="mat-radio-189"]/label/span[1]/span[1]');
+    //Input corrective action
+    await page.type("[formcontrolname=comment]", "**TEST**");
 
-    // //Hit next button
-    // await clickHandler('//*[@id="cdk-accordion-child-5"]/div/div/button[2]');
+    //Click corrective action button
+    await clickHandler(
+      '//*[@id="mat-dialog-4"]/app-comment/div[2]/form/div[2]/div'
+    );
+
+    //Select date to be completed
+    await page.click("[formcontrolname=DateCorrectiveActionToBeCompleted]");
+    await page.waitForXPath('//*[@id="ion-overlay-3"]/div[2]/div[1]/div[2]');
+    await clickHandler('//*[@id="ion-overlay-3"]/div[2]/div[1]/div[2]');
+
+    //Click and input corrective action
+    await page.click("[formcontrolname=CorrectiveActionRequired]");
+    await page.type("[formcontrolname=CorrectiveActionRequired]", "**TEST**");
+
+    //Save form 
+    await clickHandler(
+      '//*[@id="mat-dialog-5"]/app-corrective-action/form/div[3]/mat-icon'
+    );
+
+    //Save corrective action
+    await page.waitForXPath(
+      '//*[@id="mat-dialog-4"]/app-comment/div[2]/div/button[3]'
+    );
+    await clickHandler(
+      '//*[@id="mat-dialog-4"]/app-comment/div[2]/div/button[3]'
+    );
+    //-----------------------------------------------//
+
+    //All required crossing or proximity agreements in place -- YES
+    await clickHandler('//*[@id="mat-radio-189"]/label/span[1]/span[1]');
+
+    //Hit next button
+    await clickHandler('//*[@id="cdk-accordion-child-5"]/div/div/button[2]');
+
   } else {
+
+    //clicks next to all radio buttons
     await clickHandler('//*[@id="mat-radio-75"]/label/span[1]/span[1]');
     await clickHandler('//*[@id="mat-radio-174"]/label/span[1]/span[1]');
     await clickHandler('//*[@id="mat-radio-177"]/label/span[1]/span[1]');
