@@ -31,7 +31,7 @@ require("dotenv").config();
     await page.waitForNetworkIdle();
   };
 
-  console.log("SELECTING VEHICLE INSPECTION");
+  console.log("SELECTING VEHICLE INSPECTION FORM");
 
   //SELECT VEHICLE INSPECTION
   await clickHandler(
@@ -40,8 +40,7 @@ require("dotenv").config();
 
   await page.waitForNetworkIdle();
 
-  //VEHICLE
-
+  //FORM VARIABLES
   const firstAndLastName = "[id=mat-input-2]";
   const supervisorName = "[id=mat-input-3]";
   const licensePlate = "[id=mat-input-4]";
@@ -50,17 +49,30 @@ require("dotenv").config();
   const vehicleModel = "[id=mat-input-7]";
   const vehicleMileage = "[id=mat-input-8]";
 
+  //INPUT + SELECT FIRST AND LAST NAME VALUES
   await page.type(firstAndLastName, "Form Loco");
   await clickHandler("/html/body/div[2]/div/div/div/mat-option");
+
+  //INPUT + SELECT SUPERVISOR NAME VALUE
   await page.type(supervisorName, "Alvin");
   await clickHandler('//*[@id="mat-option-138"]');
+
+  //SELECT STAKEHOLDER VALUE
   await clickHandler('//*[@id="mat-select-value-1"]');
   await page.waitForXPath('//*[@id="mat-option-141"]');
   await clickHandler('//*[@id="mat-option-141"]');
+
+  //SELECT DIVISION VALUE
   await clickHandler('//*[@id="mat-select-value-3"]');
   await clickHandler('//*[@id="mat-option-145"]');
+
+  //INPUT LICENSE PLATE VALUE
   await page.type(licensePlate, "HLL420");
+
+  //INPUT UNIT # VALUE
   await page.type(unitNumber, "**TEST**");
+
+  //INPUT VEHICLE MAKE VALUE
   await page.type(vehicleMake, "Bentley");
   await clickHandler('//*[@id="mat-option-158"]');
   await page.type(vehicleModel, "F450");

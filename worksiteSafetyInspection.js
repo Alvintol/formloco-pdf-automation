@@ -64,7 +64,7 @@ require("dotenv").config();
     await page.waitForNetworkIdle();
   };
 
-  console.log("SELECTION WORKSITE-SAFETY-INSPECTION");
+  console.log("SELECTING WORKSITE-SAFETY-INSPECTION");
 
   await clickHandler(
     "/html/body/app-root/app-layout/div/div/div/app-home/div[4]/mat-card/mat-card-header"
