@@ -348,20 +348,30 @@ require("dotenv").config();
     );
     //<------------------------------------------------->
 
-    //Check Heater/Defroster sequence
+    //<---------Check Heater/Defroster sequence-------->
     await clickHandler('//*[@id="mat-checkbox-8"]/label/span[1]');
+
+     //INPUT CORRECTIVE ACTION
     await page.type("[formcontrolname=comment]", "**TEST**");
     await clickHandler(
       '//*[@id="mat-dialog-14"]/app-comment/div[2]/form/div[2]/div'
     );
+
+    //Select date to be completed
     await page.click("[formcontrolname=DateCorrectiveActionToBeCompleted]");
     await page.waitForXPath('//*[@id="ion-overlay-9"]/div[2]/div[1]/div[2]');
     await clickHandler('//*[@id="ion-overlay-9"]/div[2]/div[1]/div[2]');
+
+    //Click and input corrective action
     await page.click("[formcontrolname=CorrectiveActionRequired]");
     await page.type("[formcontrolname=CorrectiveActionRequired]", "**TEST**");
+
+    //Save form 
     await clickHandler(
       '//*[@id="mat-dialog-15"]/app-corrective-action/form/div[3]/mat-icon'
     );
+
+    //Save corrective action
     await page.waitForXPath(
       '//*[@id="mat-dialog-14"]/app-comment/div[2]/div/button[3]'
     );
@@ -369,7 +379,7 @@ require("dotenv").config();
       '//*[@id="mat-dialog-14"]/app-comment/div[2]/div/button[3]'
     );
 
-    //Check Windshield Wipers/Washers sequence
+    //<------Check Windshield Wipers/Washers sequence--->
     await clickHandler('//*[@id="mat-checkbox-9"]/label/span[1]');
     await page.type("[formcontrolname=comment]", "**TEST**");
     await clickHandler(
